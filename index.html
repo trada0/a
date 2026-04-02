@@ -14,7 +14,7 @@ font-family:Arial, Helvetica, sans-serif;
 body{
 margin:0;
 background:#f5f5f5;
-border-radius:14px;
+border-radius:16px;
 overflow-x:hidden;
 }
 
@@ -22,12 +22,10 @@ overflow-x:hidden;
 .header{
 width:100%;
 background:#e9e9e9;
+padding:16px;
 text-align:center;
-padding:18px;
 font-size:22px;
 font-weight:bold;
-position:relative;
-border-bottom:1px solid #ccc;
 }
 
 /* TOP BAR */
@@ -38,56 +36,49 @@ align-items:center;
 padding:10px 15px;
 }
 
-/* MENU ICON */
 .menu-btn{
-font-size:24px;
+font-size:22px;
 cursor:pointer;
-padding:6px 10px;
+background:white;
 border-radius:8px;
+padding:5px 10px;
+border:1px solid #ccc;
 }
 
-.menu-btn:hover{
-background:#ddd;
-}
-
-/* USER AREA */
-.user-area{
+.right-box{
 display:flex;
 align-items:center;
 gap:10px;
 }
 
+.username{
+font-size:14px;
+}
+
 .avatar{
-width:40px;
-height:40px;
+width:38px;
+height:38px;
 border-radius:50%;
 cursor:pointer;
 border:2px solid #ddd;
 }
 
-.username{
-font-size:14px;
-color:#333;
-}
-
 /* DROPDOWN */
 .dropdown{
 position:absolute;
-right:10px;
-top:110px;
+right:15px;
+top:95px;
 background:white;
 border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
 display:none;
-flex-direction:column;
 overflow:hidden;
-z-index:999;
 }
 
 .dropdown div{
-padding:12px 18px;
-border-bottom:1px solid #eee;
+padding:12px 20px;
 cursor:pointer;
+border-bottom:1px solid #eee;
 }
 
 .dropdown div:hover{
@@ -102,32 +93,23 @@ top:0;
 width:260px;
 height:100%;
 background:white;
-box-shadow:0 0 10px rgba(0,0,0,0.3);
+box-shadow:3px 0 10px rgba(0,0,0,0.15);
 transition:0.3s;
-z-index:9999;
-border-radius:0 14px 14px 0;
+z-index:999;
 }
 
-.side-menu.show{
-left:0;
-}
-
-.menu-header{
+.side-header{
+padding:15px;
+border-bottom:1px solid #eee;
 display:flex;
 justify-content:flex-end;
-padding:10px;
 }
 
 .close-menu{
 cursor:pointer;
-padding:5px 10px;
+padding:4px 10px;
 border:1px solid #ccc;
 border-radius:6px;
-}
-
-.close-menu:hover{
-background:red;
-color:white;
 }
 
 .menu-item{
@@ -137,7 +119,7 @@ cursor:pointer;
 }
 
 .menu-item:hover{
-background:#f0f0f0;
+background:#f5f5f5;
 }
 
 /* POST */
@@ -152,27 +134,27 @@ padding:15px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
 transition:0.2s;
-box-shadow:0 0 5px rgba(0,0,0,0.1);
 }
 
 .post:hover{
 transform:translateY(-4px);
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
 }
 
 .post-left{
 max-width:70%;
 }
 
-.badge{
+.tag{
 display:inline-block;
-padding:5px 10px;
+border:1px solid #2ecc71;
+padding:4px 10px;
 border-radius:6px;
-border:1px solid #4caf50;
-color:#4caf50;
-margin-top:5px;
-margin-right:5px;
+margin-top:6px;
+color:#2ecc71;
+font-size:13px;
 }
 
 .buy-btn{
@@ -187,30 +169,37 @@ cursor:pointer;
 /* POPUP */
 .popup{
 position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.popup-box{
 background:white;
 padding:20px;
 border-radius:14px;
-box-shadow:0 0 15px rgba(0,0,0,0.3);
-display:none;
-z-index:99999;
 min-width:300px;
-max-width:90%;
+max-width:95%;
+position:relative;
 }
 
-.popup-close{
+.close{
 position:absolute;
-top:8px;
 right:10px;
+top:8px;
 cursor:pointer;
 border:1px solid #ccc;
 padding:2px 8px;
 border-radius:6px;
 }
 
-.popup-close:hover{
+.close:hover{
 background:red;
 color:white;
 }
@@ -219,9 +208,9 @@ color:white;
 .input{
 width:100%;
 padding:10px;
-border:1px solid #ccc;
-border-radius:8px;
 margin-top:10px;
+border:1px solid #ddd;
+border-radius:8px;
 }
 
 .login-btn{
@@ -229,15 +218,15 @@ background:red;
 color:white;
 border:none;
 padding:10px;
-border-radius:8px;
 margin-top:10px;
-cursor:pointer;
 width:100%;
+border-radius:8px;
+cursor:pointer;
 }
 
-.register-link{
+.link{
 font-size:13px;
-margin-top:5px;
+margin-top:6px;
 cursor:pointer;
 }
 
@@ -250,42 +239,29 @@ width:100%;
 height:100%;
 background:white;
 display:none;
+flex-direction:column;
 align-items:center;
 justify-content:center;
-flex-direction:column;
-z-index:999999;
+z-index:99999;
 }
 
-.progress{
-width:200px;
-height:8px;
-background:#eee;
-border-radius:10px;
-margin-top:10px;
-overflow:hidden;
+.loading img{
+width:120px;
+margin-bottom:15px;
 }
 
 .bar{
+width:200px;
+height:10px;
+background:#eee;
+border-radius:10px;
+overflow:hidden;
+}
+
+.bar div{
 height:100%;
 width:0%;
-background:red;
-}
-
-/* SUPPORT */
-.support-box{
-display:flex;
-align-items:center;
-gap:10px;
-border:1px solid #ccc;
-padding:10px;
-border-radius:10px;
-margin-top:10px;
-cursor:pointer;
-}
-
-.support-box img{
-width:80px;
-border-radius:8px;
+background:#2ecc71;
 }
 
 </style>
@@ -298,163 +274,144 @@ bán tài khoản facebook
 </div>
 
 <div class="topbar">
+
 <div class="menu-btn" onclick="openMenu()">☰</div>
 
-<div class="user-area">
-<div class="username" id="helloText">Xin chào, Khách</div>
-<img class="avatar" onclick="toggleDropdown()" 
+<div class="right-box">
+<div class="username" id="hello">Xin chào, khách</div>
+<img class="avatar" onclick="toggleDropdown()"
 src="https://d2eioyamun8mp1.cloudfront.net/images/1775110178008_od0kbCwWky.jpg">
 </div>
+
 </div>
 
+<!-- dropdown -->
 <div class="dropdown" id="dropdown"></div>
 
-<!-- SIDE MENU -->
-<div class="side-menu" id="sideMenu">
-<div class="menu-header">
+<!-- side menu -->
+<div class="side-menu" id="menu">
+<div class="side-header">
 <div class="close-menu" onclick="closeMenu()">X</div>
 </div>
 
 <div class="menu-item" onclick="location.reload()">Trang chủ</div>
-<div class="menu-item" onclick="openNap()">Nạp tiền</div>
-<div class="menu-item" onclick="openSupport()">Hỗ trợ</div>
-<div class="menu-item" onclick="openHistory()">Lịch sử giao dịch</div>
+<div class="menu-item" onclick="napTien()">Nạp tiền</div>
+<div class="menu-item" onclick="hoTro()">Hỗ trợ</div>
+<div class="menu-item" onclick="lichSu()">Lịch sử giao dịch</div>
+
 </div>
 
 <!-- POST -->
 <div class="container">
+
 <div class="post">
+
 <div class="post-left">
 <div>
 TÀI KHOẢN TẠO 2 THÁNG, 1K-2KFR, 2FA, MAIL NHẬN ĐƯỢC CODE
 </div>
 
-<div class="badge">Số lượng: 10</div>
-<div class="badge">Giá: 10000đ</div>
+<div class="tag">Số lượng: 10</div>
+<div class="tag">Giá: 10000đ</div>
 
 </div>
 
-<button class="buy-btn" onclick="openBuy()">Mua ngay</button>
+<button class="buy-btn" onclick="buy()">Mua ngay</button>
+
 </div>
+
 </div>
 
 <!-- LOGIN POPUP -->
 <div class="popup" id="loginPopup">
-<div class="popup-close" onclick="closePopup('loginPopup')">X</div>
+<div class="popup-box">
 
-<input class="input" placeholder="name user" id="user">
-<input class="input" placeholder="pass" id="pass" type="password">
+<div class="close" onclick="closeLogin()">X</div>
+
+<input class="input" id="user" placeholder="name user">
+<input class="input" id="pass" type="password" placeholder="pass">
 
 <button class="login-btn" onclick="login()">Đăng nhập</button>
-<div class="register-link">đăng kí</div>
 
+<div class="link">Đăng kí</div>
+
+</div>
 </div>
 
 <!-- BUY POPUP -->
 <div class="popup" id="buyPopup">
-<div class="popup-close" onclick="closePopup('buyPopup')">X</div>
+<div class="popup-box">
+
+<div class="close" onclick="closeBuy()">X</div>
 
 <div>
 TÀI KHOẢN TẠO 2 THÁNG, 1K-2KFR, 2FA, MAIL NHẬN ĐƯỢC CODE
 </div>
 
-<div style="margin-top:10px">
-Số lượng cần mua
-<input class="input" type="number" value="1" id="qty" oninput="calc()">
-</div>
+<input class="input" id="qty" type="number" placeholder="Số lượng cần mua"
+oninput="calc()">
 
-<div style="margin-top:10px">
-Thành tiền: <span id="total">10000</span>đ
-</div>
+<div id="total">Thành tiền: 0đ</div>
 
 <button class="login-btn">Thanh toán</button>
 
 </div>
-
-<!-- SUPPORT -->
-<div class="popup" id="supportPopup">
-<div class="popup-close" onclick="closePopup('supportPopup')">X</div>
-
-<div class="support-box"
-onclick="window.open('https://zalo.me/0347241585')">
-<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119884021_m6gzpRkcXR.jpg">
-<div>Zalo</div>
 </div>
 
-<div class="support-box"
-onclick="window.open('https://www.facebook.com/profile.php?id=1815703088')">
-<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg">
-<div>Facebook</div>
-</div>
-
-</div>
-
-<!-- HISTORY -->
-<div class="popup" id="historyPopup">
-<div style="position:absolute;top:-18px;left:10px;font-weight:bold">
-Lịch sử giao dịch
-</div>
-
-<div class="popup-close" onclick="closePopup('historyPopup')">X</div>
-
-<div style="text-align:center;padding:40px">
-Chưa có lịch sử giao dịch nào
-</div>
-
-</div>
-
-<!-- NAP -->
-<div class="popup" id="napPopup">
-<div class="popup-close" onclick="closePopup('napPopup')">X</div>
-<div>TÍNH NĂNG SẼ ĐƯỢC ADMIN UPDATE SAU</div>
-</div>
-
-<!-- LOADING -->
+<!-- loading -->
 <div class="loading" id="loading">
-<img width="120"
-src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg">
 
-<div class="progress">
-<div class="bar" id="bar"></div>
+<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg">
+
+<div class="bar">
+<div id="bar"></div>
 </div>
+
 </div>
 
 <script>
-
-function openMenu(){
-document.getElementById("sideMenu").classList.add("show")
-}
-
-function closeMenu(){
-document.getElementById("sideMenu").classList.remove("show")
-}
+let logged=false
 
 function toggleDropdown(){
 let box=document.getElementById("dropdown")
-box.style.display=box.style.display=="flex"?"none":"flex"
 
-let user=localStorage.getItem("user")
-
-if(user){
-box.innerHTML=`
-<div>Cập nhật thông tin</div>
-<div>Nạp tiền</div>
-<div onclick="logout()">Đăng xuất</div>
-`
-}else{
-box.innerHTML=`
-<div onclick="openLogin()">Đăng nhập</div>
-<div>Đăng kí</div>
-`
+if(box.style.display=="block"){
+box.style.display="none"
+return
 }
+
+box.innerHTML=""
+
+if(logged){
+
+box.innerHTML+=`<div>Cập nhật thông tin</div>`
+box.innerHTML+=`<div>Nạp tiền</div>`
+box.innerHTML+=`<div onclick="logout()">Đăng xuất</div>`
+
+}else{
+
+box.innerHTML+=`<div onclick="openLogin()">Đăng nhập</div>`
+box.innerHTML+=`<div>Đăng kí</div>`
+
+}
+
+box.style.display="block"
+}
+
+function openMenu(){
+document.getElementById("menu").style.left="0"
+}
+
+function closeMenu(){
+document.getElementById("menu").style.left="-260px"
 }
 
 function openLogin(){
-document.getElementById("loginPopup").style.display="block"
+document.getElementById("loginPopup").style.display="flex"
 }
 
-function closePopup(id){
-document.getElementById(id).style.display="none"
+function closeLogin(){
+document.getElementById("loginPopup").style.display="none"
 }
 
 function login(){
@@ -462,316 +419,167 @@ let u=document.getElementById("user").value
 let p=document.getElementById("pass").value
 
 if(u=="admin" && p=="admin"){
+
+alert("đăng nhập thành công")
+document.cookie="user="+u
 startLoading()
-setTimeout(()=>{
-localStorage.setItem("user",u)
-location.reload()
-},1200)
 
 }else{
-alert("tài khoản hoặc mật khẩu sai")
+alert("sai tài khoản hoặc mật khẩu")
 }
-}
-
-function logout(){
-localStorage.removeItem("user")
-location.reload()
 }
 
 function startLoading(){
-let load=document.getElementById("loading")
-load.style.display="flex"
+document.getElementById("loading").style.display="flex"
 
-let bar=document.getElementById("bar")
 let i=0
+let bar=document.getElementById("bar")
 
 let t=setInterval(()=>{
 i++
 bar.style.width=i+"%"
 
-if(i>=100) clearInterval(t)
-
-},10)
+if(i>=100){
+clearInterval(t)
+location.reload()
 }
 
-function openBuy(){
-document.getElementById("buyPopup").style.display="block"
+},20)
+}
+function logout(){
+document.cookie="user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+location.reload()
 }
 
-function calc(){
-let q=document.getElementById("qty").value
-document.getElementById("total").innerText=q*10000
-}
-
-function openSupport(){
-document.getElementById("supportPopup").style.display="block"
-}
-
-function openHistory(){
-document.getElementById("historyPopup").style.display="block"
-}
-
-function openNap(){
-document.getElementById("napPopup").style.display="block"
+function getCookie(name){
+let v=document.cookie.match('(^|;) ?'+name+'=([^;]*)(;|$)')
+return v?v[2]:null
 }
 
 window.onload=function(){
-let user=localStorage.getItem("user")
-if(user){
-document.getElementById("helloText").innerText="Xin chào, "+user
+let u=getCookie("user")
+if(u){
+logged=true
+document.getElementById("hello").innerText="Xin chào, "+u
 }
 }
+
+/* BUY */
+function buy(){
+document.getElementById("buyPopup").style.display="flex"
+}
+
+function closeBuy(){
+document.getElementById("buyPopup").style.display="none"
+}
+
+function calc(){
+let q=document.getElementById("qty").value || 0
+let total=q*10000
+document.getElementById("total").innerText="Thành tiền: "+total+"đ"
+}
+
+/* MENU POPUPS */
+function napTien(){
+alert("TÍNH NĂNG SẼ ĐƯỢC ADMIN UPDATE SAU")
+closeMenu()
+}
+
+function hoTro(){
+closeMenu()
+
+let html=`
+<div class="popup" id="supportPopup" style="display:flex">
+<div class="popup-box" style="width:420px">
+
+<div class="close" onclick="this.parentElement.parentElement.remove()">X</div>
+
+<div onclick="window.open('https://zalo.me/0347241585')" 
+style="display:flex;align-items:center;
+gap:10px;border:1px solid #ddd;
+padding:10px;border-radius:10px;
+margin-bottom:10px;cursor:pointer">
+
+<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119884021_m6gzpRkcXR.jpg"
+style="width:80px;border-radius:8px">
+
+<div>Zalo</div>
+</div>
+
+<div onclick="window.open('https://www.facebook.com/profile.php?id=1815703088')" 
+style="display:flex;align-items:center;
+gap:10px;border:1px solid #ddd;
+padding:10px;border-radius:10px;
+cursor:pointer">
+
+<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg"
+style="width:80px;border-radius:8px">
+
+<div>Facebook</div>
+</div>
+
+</div>
+</div>
+`
+document.body.insertAdjacentHTML("beforeend",html)
+}
+
+function lichSu(){
+closeMenu()
+
+let html=`
+<div class="popup" style="display:flex">
+<div class="popup-box" style="width:500px;height:300px">
+
+<div style="position:absolute;top:-22px;left:10px;
+font-weight:bold">
+Lịch sử giao dịch
+</div>
+
+<div class="close"
+onclick="this.parentElement.parentElement.remove()">X</div>
+
+<div style="height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#888">
+Chưa có lịch sử giao dịch nào
+</div>
+
+</div>
+</div>
+`
+
+document.body.insertAdjacentHTML("beforeend",html)
+}
+
+/* CLICK OUTSIDE CLOSE */
+window.onclick=function(e){
+
+let dropdown=document.getElementById("dropdown")
+if(!e.target.closest(".avatar")){
+dropdown.style.display="none"
+}
+
+}
+
+/* HOVER X RED */
+document.addEventListener("mouseover",function(e){
+if(e.target.classList.contains("close")){
+e.target.style.background="red"
+e.target.style.color="white"
+}
+})
+
+document.addEventListener("mouseout",function(e){
+if(e.target.classList.contains("close")){
+e.target.style.background=""
+e.target.style.color=""
+}
+})
 
 </script>
 
 </body>
 </html>
-<!-- ====== PHẦN CODE VIẾT TIẾP ====== -->
-
-<style>
-
-/* overlay nền mờ */
-.overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.4);
-display:none;
-z-index:9999;
-}
-
-/* popup animation */
-.popup{
-animation:popupShow .2s ease;
-}
-
-@keyframes popupShow{
-from{
-opacity:0;
-transform:translate(-50%,-60%);
-}
-to{
-opacity:1;
-transform:translate(-50%,-50%);
-}
-}
-
-/* bo góc toàn bộ web */
-.header,
-.post,
-.popup,
-.side-menu,
-.dropdown{
-border-radius:14px;
-}
-
-/* hover dấu X */
-.popup-close{
-transition:.2s;
-}
-
-.popup-close:hover{
-background:red;
-color:white;
-border:1px solid red;
-}
-
-/* dropdown đẹp hơn */
-.dropdown div:last-child{
-border-bottom:none;
-}
-
-.dropdown div{
-transition:.15s;
-}
-
-/* menu divider màu */
-.menu-item{
-border-bottom:1px solid #e0e0e0;
-}
-
-/* responsive */
-@media(max-width:600px){
-
-.post{
-flex-direction:column;
-align-items:flex-start;
-gap:10px;
-}
-
-.buy-btn{
-width:100%;
-}
-
-.post-left{
-max-width:100%;
-}
-
-}
-
-</style>
-
-<div class="overlay" id="overlay" onclick="closeAll()"></div>
-
-<script>
-
-/* overlay helpers */
-function showOverlay(){
-document.getElementById("overlay").style.display="block"
-}
-
-function hideOverlay(){
-document.getElementById("overlay").style.display="none"
-}
-
-/* sửa open popup */
-function openLogin(){
-showOverlay()
-document.getElementById("loginPopup").style.display="block"
-}
-
-function openBuy(){
-showOverlay()
-document.getElementById("buyPopup").style.display="block"
-}
-
-function openSupport(){
-showOverlay()
-document.getElementById("supportPopup").style.display="block"
-}
-
-function openHistory(){
-showOverlay()
-document.getElementById("historyPopup").style.display="block"
-}
-
-function openNap(){
-showOverlay()
-document.getElementById("napPopup").style.display="block"
-}
-
-/* đóng tất cả */
-function closeAll(){
-document.querySelectorAll(".popup").forEach(p=>{
-p.style.display="none"
-})
-hideOverlay()
-}
-
-/* sửa close popup */
-function closePopup(id){
-document.getElementById(id).style.display="none"
-hideOverlay()
-}
-
-/* dropdown đóng khi click ngoài */
-document.addEventListener("click",function(e){
-let drop=document.getElementById("dropdown")
-let avatar=document.querySelector(".avatar")
-
-if(!drop.contains(e.target) && !avatar.contains(e.target)){
-drop.style.display="none"
-}
-})
-
-/* menu click ngoài đóng */
-document.addEventListener("click",function(e){
-let menu=document.getElementById("sideMenu")
-let btn=document.querySelector(".menu-btn")
-
-if(!menu.contains(e.target) && !btn.contains(e.target)){
-menu.classList.remove("show")
-}
-})
-
-/* cookie login */
-function setCookie(name,value,days){
-let d=new Date()
-d.setTime(d.getTime()+(days*24*60*60*1000))
-let expires="expires="+d.toUTCString()
-document.cookie=name+"="+value+";"+expires+";path=/"
-}
-
-function getCookie(name){
-let n=name+"="
-let ca=document.cookie.split(';')
-for(let i=0;i<ca.length;i++){
-let c=ca[i].trim()
-if(c.indexOf(n)==0) return c.substring(n.length,c.length)
-}
-return ""
-}
-
-/* sửa login */
-function login(){
-let u=document.getElementById("user").value
-let p=document.getElementById("pass").value
-
-if(u=="admin" && p=="admin"){
-
-startLoading()
-
-setTimeout(()=>{
-setCookie("user",u,7)
-location.reload()
-},1200)
-
-}else{
-alert("tài khoản hoặc mật khẩu")
-}
-}
-
-/* sửa logout */
-function logout(){
-setCookie("user","",-1)
-location.reload()
-}
-
-/* load username */
-window.onload=function(){
-
-let user=getCookie("user")
-
-if(user){
-document.getElementById("helloText").innerText="Xin chào, "+user
-}
-
-}
-
-/* loading đẹp hơn */
-function startLoading(){
-
-let load=document.getElementById("loading")
-load.style.display="flex"
-
-let bar=document.getElementById("bar")
-let percent=0
-
-let t=setInterval(()=>{
-
-percent+=2
-
-bar.style.width=percent+"%"
-
-if(percent>=100){
-clearInterval(t)
-}
-
-},20)
-
-}
-
-/* hover post nâng mạnh hơn */
-document.querySelectorAll(".post").forEach(p=>{
-p.addEventListener("mouseenter",()=>{
-p.style.transform="translateY(-6px)"
-})
-
-p.addEventListener("mouseleave",()=>{
-p.style.transform="translateY(0px)"
-})
-})
-
-</script>
