@@ -3,14 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bán tài khoản Facebook</title>
+<title>Bán tài khoản facebook</title>
 
 <style>
-*{
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
-}
-
+*{box-sizing:border-box;font-family:Arial}
 body{
 margin:0;
 background:#f5f5f5;
@@ -18,24 +14,26 @@ border-radius:14px;
 overflow-x:hidden;
 }
 
+/* header */
 .header{
-width:100%;
 background:#eee;
 text-align:center;
 padding:18px;
 font-size:22px;
 font-weight:bold;
+width:100%;
 }
 
+/* topbar */
 .topbar{
 display:flex;
 justify-content:space-between;
-align-items:center;
 padding:10px 15px;
+align-items:center;
 }
 
 .menu-btn{
-font-size:24px;
+font-size:25px;
 cursor:pointer;
 }
 
@@ -47,47 +45,79 @@ position:relative;
 }
 
 .avatar{
-width:40px;
-height:40px;
+width:42px;
+height:42px;
 border-radius:50%;
 cursor:pointer;
-}
-
-.hello{
-font-size:14px;
 }
 
 .dropdown{
 position:absolute;
 right:0;
-top:50px;
+top:55px;
 background:white;
 border-radius:10px;
 box-shadow:0 0 10px rgba(0,0,0,0.2);
 display:none;
-flex-direction:column;
 overflow:hidden;
+min-width:160px;
+z-index:999;
 }
 
 .dropdown div{
-padding:10px 20px;
+padding:10px;
 border-bottom:1px solid #eee;
 cursor:pointer;
 }
 
 .dropdown div:hover{
-background:#f3f3f3;
+background:#f2f2f2;
 }
 
-.post{
+/* menu */
+.side{
+position:fixed;
+left:-260px;
+top:0;
+width:250px;
+height:100%;
 background:white;
-margin:20px;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+transition:.3s;
+z-index:999;
+border-right:1px solid #ddd;
+}
+
+.side .closemenu{
+position:absolute;
+right:10px;
+top:5px;
+cursor:pointer;
+border:1px solid #ccc;
+padding:2px 7px;
+border-radius:6px;
+}
+
+.side div.item{
 padding:15px;
+border-bottom:1px solid #ddd;
+cursor:pointer;
+}
+
+.side div.item:hover{
+background:#f5f5f5;
+}
+
+/* post */
+.post{
+margin:20px;
+background:white;
 border-radius:12px;
+padding:15px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-transition:0.2s;
+transition:.2s;
 }
 
 .post:hover{
@@ -96,12 +126,11 @@ box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
 .badge{
-background:#e7f7ff;
-padding:5px 10px;
+border:1px solid #00aaff;
+padding:4px 10px;
 border-radius:6px;
 margin-top:5px;
 display:inline-block;
-border:1px solid #00aaff;
 }
 
 .buy{
@@ -113,35 +142,35 @@ border-radius:8px;
 cursor:pointer;
 }
 
+/* popup */
 .popup{
 position:fixed;
-top:0;
-left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.4);
+background:rgba(0,0,0,.4);
 display:none;
 justify-content:center;
 align-items:center;
-z-index:999;
+z-index:2000;
 }
 
-.popup-box{
+.box{
 background:white;
 padding:20px;
 border-radius:12px;
-min-width:300px;
 position:relative;
+min-width:300px;
+max-width:90%;
 }
 
 .close{
 position:absolute;
 right:10px;
 top:10px;
-cursor:pointer;
 border:1px solid #ccc;
 padding:2px 8px;
 border-radius:6px;
+cursor:pointer;
 }
 
 .close:hover{
@@ -152,9 +181,9 @@ color:white;
 input{
 width:100%;
 padding:10px;
-margin:5px 0;
 border:1px solid #ddd;
 border-radius:6px;
+margin:5px 0;
 }
 
 .btn-red{
@@ -167,27 +196,20 @@ width:100%;
 cursor:pointer;
 }
 
-.side-menu{
-position:fixed;
-left:-260px;
-top:0;
-width:250px;
-height:100%;
-background:white;
-box-shadow:0 0 10px rgba(0,0,0,0.3);
-transition:0.3s;
-z-index:1000;
-padding-top:20px;
-}
-
-.side-menu div{
-padding:15px;
-border-bottom:1px solid #eee;
+.support-box{
+display:flex;
+align-items:center;
+gap:10px;
+border:1px solid #ddd;
+padding:10px;
+border-radius:10px;
 cursor:pointer;
+margin-top:10px;
 }
 
-.side-menu div:hover{
-background:#f3f3f3;
+.support-box img{
+width:70px;
+border-radius:6px;
 }
 
 .loader{
@@ -199,7 +221,7 @@ display:none;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-z-index:2000;
+z-index:3000;
 }
 
 .bar{
@@ -222,6 +244,7 @@ background:red;
 
 <body>
 
+<!-- loading -->
 <div class="loader" id="loader">
 <img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg" width="120">
 <div class="bar"><div id="progress"></div></div>
@@ -234,15 +257,18 @@ background:red;
 <div class="menu-btn" onclick="openMenu()">☰</div>
 
 <div class="user-area">
-<div class="hello" id="hello">Xin chào, khách</div>
+<div id="hello">xin chào, khách</div>
 
-<img class="avatar" onclick="toggleUser()" src="https://d2eioyamun8mp1.cloudfront.net/images/1775110178008_od0kbCwWky.jpg">
+<img class="avatar"
+onclick="toggleUser()"
+src="https://d2eioyamun8mp1.cloudfront.net/images/1775110178008_od0kbCwWky.jpg">
 
 <div class="dropdown" id="dropdown"></div>
 
 </div>
 </div>
 
+<!-- post -->
 <div class="post">
 <div>
 <div>TÀI KHOẢN TẠO 2 THÁNG, 1K-2KFR, 2FA, MAIL NHẬN ĐƯỢC CODE</div>
@@ -253,29 +279,24 @@ background:red;
 <button class="buy" onclick="buy()">Mua ngay</button>
 </div>
 
-
 <!-- login -->
-<div class="popup" id="loginPopup">
-<div class="popup-box">
-
-<div class="close" onclick="closePopup('loginPopup')">X</div>
+<div class="popup" id="login">
+<div class="box">
+<div class="close" onclick="hide('login')">X</div>
 
 <input id="user" placeholder="name user">
 <input id="pass" placeholder="pass" type="password">
 
-<button class="btn-red" onclick="login()">Đăng nhập</button>
+<button class="btn-red" onclick="login()">đăng nhập</button>
 
-<div style="margin-top:5px;cursor:pointer">Đăng kí</div>
-
+<div style="margin-top:5px">đăng kí</div>
 </div>
 </div>
-
 
 <!-- buy -->
-<div class="popup" id="buyPopup">
-<div class="popup-box">
-
-<div class="close" onclick="closePopup('buyPopup')">X</div>
+<div class="popup" id="buy">
+<div class="box">
+<div class="close" onclick="hide('buy')">X</div>
 
 <div>TÀI KHOẢN TẠO 2 THÁNG, 1K-2KFR, 2FA, MAIL NHẬN ĐƯỢC CODE</div>
 
@@ -286,19 +307,56 @@ background:red;
 
 <div>Thành tiền: <span id="total">10000</span>đ</div>
 
-<button class="btn-red">Thanh toán</button>
+<button class="btn-red">thanh toán</button>
 
 </div>
 </div>
 
+<!-- support -->
+<div class="popup" id="support">
+<div class="box">
 
-<div class="side-menu" id="menu">
-<div onclick="location.reload()">Trang chủ</div>
-<div onclick="alert('TÍNH NĂNG SẼ ĐƯỢC ADMIN UPDATE SAU')">Nạp tiền</div>
-<div onclick="support()">Hỗ trợ</div>
-<div onclick="history()">Lịch sử giao dịch</div>
+<div class="close" onclick="hide('support')">X</div>
+
+<div class="support-box"
+onclick="window.open('https://zalo.me/0347241585')">
+<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119884021_m6gzpRkcXR.jpg">
+<div>zalo</div>
 </div>
 
+<div class="support-box"
+onclick="window.open('https://www.facebook.com/profile.php?id=1815703088')">
+<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg">
+<div>facebook</div>
+</div>
+
+</div>
+</div>
+
+<!-- history -->
+<div class="popup" id="history">
+<div class="box">
+
+<div class="close" onclick="hide('history')">X</div>
+
+<div style="text-align:center;padding:30px">
+Chưa có lịch sử giao dịch nào
+</div>
+
+</div>
+</div>
+
+<!-- menu -->
+<div class="side" id="side">
+
+<div class="closemenu" onclick="closeMenu()">X</div>
+
+<div class="item" onclick="location.reload()">Trang chủ</div>
+<div class="item" onclick="alert('TÍNH NĂNG SẼ ĐƯỢC ADMIN UPDATE SAU')">Nạp tiền</div>
+<div class="item" onclick="show('support')">Hỗ trợ</div>
+<div class="item" onclick="show('history')">lịch sử giao dịch</div>
+
+</div>
 
 <script>
 
@@ -306,7 +364,7 @@ let logged=false
 
 function toggleUser(){
 let d=document.getElementById("dropdown")
-d.style.display=d.style.display=="flex"?"none":"flex"
+d.style.display=d.style.display=="block"?"none":"block"
 d.innerHTML=""
 
 if(logged){
@@ -317,23 +375,23 @@ d.innerHTML=`
 `
 }else{
 d.innerHTML=`
-<div onclick="showLogin()">Đăng nhập</div>
-<div>Đăng kí</div>
+<div onclick="show('login')">đăng nhập</div>
+<div>đăng kí</div>
 `
 }
 }
 
-function showLogin(){
-document.getElementById("loginPopup").style.display="flex"
+function show(id){
+document.getElementById(id).style.display="flex"
 }
 
-function closePopup(id){
+function hide(id){
 document.getElementById(id).style.display="none"
 }
 
 function login(){
-let u=document.getElementById("user").value
-let p=document.getElementById("pass").value
+let u=user.value
+let p=pass.value
 
 if(u=="admin" && p=="admin"){
 document.cookie="user="+u
@@ -344,28 +402,24 @@ alert("sai tài khoản hoặc mật khẩu")
 }
 
 function loading(){
-document.getElementById("loader").style.display="flex"
-
+loader.style.display="flex"
 let i=0
-let bar=document.getElementById("progress")
-
 let t=setInterval(()=>{
 i+=5
-bar.style.width=i+"%"
+progress.style.width=i+"%"
 if(i>=100){
 clearInterval(t)
 location.reload()
 }
-},80)
+},60)
 }
 
-window.onload=function(){
+window.onload=()=>{
 let c=document.cookie
-
 if(c.includes("user=")){
 logged=true
 let u=c.split("user=")[1]
-document.getElementById("hello").innerText="Xin chào, "+u
+hello.innerText="xin chào, "+u
 }
 }
 
@@ -375,31 +429,20 @@ location.reload()
 }
 
 function openMenu(){
-document.getElementById("menu").style.left="0"
+side.style.left="0"
 }
 
-document.onclick=function(e){
-if(!e.target.closest(".menu-btn")){
-document.getElementById("menu").style.left="-260px"
-}
+function closeMenu(){
+side.style.left="-260px"
 }
 
 function buy(){
-document.getElementById("buyPopup").style.display="flex"
+show("buy")
 calc()
 }
 
 function calc(){
-let q=document.getElementById("qty").value
-document.getElementById("total").innerText=q*10000
-}
-
-function support(){
-window.open("https://zalo.me/0347241585")
-}
-
-function history(){
-alert("Chưa có lịch sử giao dịch nào")
+total.innerText=qty.value*10000
 }
 
 </script>
