@@ -67,12 +67,13 @@ border:2px solid #ddd;
 .dropdown{
 position:absolute;
 right:15px;
-top:95px;
+top:70px;
 background:white;
 border-radius:10px;
 box-shadow:0 5px 15px rgba(0,0,0,0.15);
 display:none;
 overflow:hidden;
+z-index:9999;
 }
 
 .dropdown div{
@@ -266,7 +267,6 @@ background:#2ecc71;
 
 </style>
 </head>
-
 <body>
 
 <div class="header">
@@ -353,7 +353,7 @@ oninput="calc()">
 
 <div id="total">Thành tiền: 0đ</div>
 
-<button class="login-btn">Thanh toán</button>
+<button class="login-btn" onclick="thanhToan()">Thanh toán</button>
 
 </div>
 </div>
@@ -368,10 +368,23 @@ oninput="calc()">
 </div>
 
 </div>
-
 <script>
 let logged=false
+let balance=0
+let history=[]
 
+/* STORAGE */
+function save(){
+localStorage.setItem("balance",balance)
+localStorage.setItem("history",JSON.stringify(history))
+}
+
+function load(){
+balance=parseInt(localStorage.getItem("balance")) || 0
+history=JSON.parse(localStorage.getItem("history")||"[]")
+}
+
+/* DROPDOWN */
 function toggleDropdown(){
 let box=document.getElementById("dropdown")
 
@@ -384,8 +397,8 @@ box.innerHTML=""
 
 if(logged){
 
-box.innerHTML+=`<div>Cập nhật thông tin</div>`
-box.innerHTML+=`<div>Nạp tiền</div>`
+box.innerHTML+=`<div>Số dư: ${balance}đ</div>`
+box.innerHTML+=`<div onclick="napTien()">Nạp tiền</div>`
 box.innerHTML+=`<div onclick="logout()">Đăng xuất</div>`
 
 }else{
@@ -415,13 +428,13 @@ document.getElementById("loginPopup").style.display="none"
 }
 
 function login(){
-let u=document.getElementById("user").value
-let p=document.getElementById("pass").value
+let u=document.getElementById("user").value.trim()
+let p=document.getElementById("pass").value.trim()
 
 if(u=="admin" && p=="admin"){
 
 alert("đăng nhập thành công")
-document.cookie="user="+u
+document.cookie="user="+u+"; path=/"
 startLoading()
 
 }else{
@@ -441,11 +454,20 @@ bar.style.width=i+"%"
 
 if(i>=100){
 clearInterval(t)
-location.reload()
+
+logged=true
+let u=getCookie("user")
+document.getElementById("hello").innerText="Xin chào, "+u
+
+load()
+document.getElementById("loading").style.display="none"
+closeLogin()
+
 }
 
 },20)
 }
+
 function logout(){
 document.cookie="user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
 location.reload()
@@ -461,11 +483,18 @@ let u=getCookie("user")
 if(u){
 logged=true
 document.getElementById("hello").innerText="Xin chào, "+u
+load()
 }
 }
 
 /* BUY */
 function buy(){
+
+if(!logged){
+openLogin()
+return
+}
+
 document.getElementById("buyPopup").style.display="flex"
 }
 
@@ -475,76 +504,119 @@ document.getElementById("buyPopup").style.display="none"
 
 function calc(){
 let q=document.getElementById("qty").value || 0
+if(q<0) q=0
+
 let total=q*10000
 document.getElementById("total").innerText="Thành tiền: "+total+"đ"
 }
 
-/* MENU POPUPS */
+function thanhToan(){
+
+let q=document.getElementById("qty").value || 0
+q=parseInt(q)
+
+if(!q || q<=0){
+alert("Nhập số lượng")
+return
+}
+
+let total=q*10000
+
+if(balance < total){
+alert("Không đủ số dư")
+return
+}
+
+balance-=total
+
+history.unshift({
+time:new Date().toLocaleString(),
+name:"TK FB 2 THÁNG",
+qty:q,
+total:total
+})
+
+save()
+
+alert("Mua thành công")
+closeBuy()
+}
+
+/* NẠP TIỀN */
 function napTien(){
-alert("TÍNH NĂNG SẼ ĐƯỢC ADMIN UPDATE SAU")
 closeMenu()
+
+let html=`
+<div class="popup" style="display:flex">
+<div class="popup-box">
+
+<div class="close"
+onclick="this.parentElement.parentElement.remove()">X</div>
+
+<div>Nạp demo:</div>
+
+<input id="nap" class="input" placeholder="Nhập số tiền">
+
+<button class="login-btn" onclick="xacNhanNap()">Xác nhận</button>
+
+</div>
+</div>
+`
+
+document.body.insertAdjacentHTML("beforeend",html)
+}
+
+function xacNhanNap(){
+let n=parseInt(document.getElementById("nap").value)
+
+if(!n || n<=0){
+alert("Nhập số hợp lệ")
+return
+}
+
+balance+=n
+save()
+
+alert("Nạp thành công")
+
+document.querySelector(".popup").remove()
 }
 
 function hoTro(){
 closeMenu()
 
-let html=`
-<div class="popup" id="supportPopup" style="display:flex">
-<div class="popup-box" style="width:420px">
-
-<div class="close" onclick="this.parentElement.parentElement.remove()">X</div>
-
-<div onclick="window.open('https://zalo.me/0347241585')" 
-style="display:flex;align-items:center;
-gap:10px;border:1px solid #ddd;
-padding:10px;border-radius:10px;
-margin-bottom:10px;cursor:pointer">
-
-<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119884021_m6gzpRkcXR.jpg"
-style="width:80px;border-radius:8px">
-
-<div>Zalo</div>
-</div>
-
-<div onclick="window.open('https://www.facebook.com/profile.php?id=1815703088')" 
-style="display:flex;align-items:center;
-gap:10px;border:1px solid #ddd;
-padding:10px;border-radius:10px;
-cursor:pointer">
-
-<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg"
-style="width:80px;border-radius:8px">
-
-<div>Facebook</div>
-</div>
-
-</div>
-</div>
-`
-document.body.insertAdjacentHTML("beforeend",html)
+alert("Liên hệ admin")
 }
 
 function lichSu(){
 closeMenu()
 
+let list=""
+
+if(history.length==0){
+list="Chưa có lịch sử"
+}else{
+
+history.forEach(i=>{
+list+=`
+<div style="border-bottom:1px solid #eee;padding:8px">
+${i.time}<br>
+${i.name} | SL: ${i.qty} | ${i.total}đ
+</div>
+`
+})
+
+}
+
 let html=`
 <div class="popup" style="display:flex">
-<div class="popup-box" style="width:500px;height:300px">
-
-<div style="position:absolute;top:-22px;left:10px;
-font-weight:bold">
-Lịch sử giao dịch
-</div>
+<div class="popup-box" style="width:500px;height:400px">
 
 <div class="close"
 onclick="this.parentElement.parentElement.remove()">X</div>
 
-<div style="height:100%;
-display:flex;
-align-items:center;
-justify-content:center;
-color:#888">
-Chưa có lịch sử giao dịch nào
+<div style="height:100%;overflow:auto">
+${list}
 </div>
 
 </div>
@@ -556,12 +628,10 @@ document.body.insertAdjacentHTML("beforeend",html)
 
 /* CLICK OUTSIDE CLOSE */
 window.onclick=function(e){
-
 let dropdown=document.getElementById("dropdown")
-if(!e.target.closest(".avatar")){
+if(!e.target.closest(".avatar") && !e.target.closest(".dropdown")){
 dropdown.style.display="none"
 }
-
 }
 
 /* HOVER X RED */
@@ -578,7 +648,6 @@ e.target.style.background=""
 e.target.style.color=""
 }
 })
-
 </script>
 
 </body>
