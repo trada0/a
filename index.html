@@ -3,652 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bán tài khoản Facebook</title>
+<title>Giao diện giống hình</title>
 
 <style>
 *{
+margin:0;
+padding:0;
 box-sizing:border-box;
 font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
-margin:0;
-background:#f5f5f5;
-border-radius:16px;
-overflow-x:hidden;
-}
-
-/* HEADER */
-.header{
-width:100%;
-background:#e9e9e9;
-padding:16px;
-text-align:center;
-font-size:22px;
-font-weight:bold;
-}
-
-/* TOP BAR */
-.topbar{
+height:100vh;
 display:flex;
-justify-content:space-between;
-align-items:center;
-padding:10px 15px;
-}
-
-.menu-btn{
-font-size:22px;
-cursor:pointer;
-background:white;
-border-radius:8px;
-padding:5px 10px;
-border:1px solid #ccc;
-}
-
-.right-box{
-display:flex;
-align-items:center;
-gap:10px;
-}
-
-.username{
-font-size:14px;
-}
-
-.avatar{
-width:38px;
-height:38px;
-border-radius:50%;
-cursor:pointer;
-border:2px solid #ddd;
-}
-
-/* DROPDOWN */
-.dropdown{
-position:absolute;
-right:15px;
-top:70px;
-background:white;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.15);
-display:none;
-overflow:hidden;
-z-index:9999;
-}
-
-.dropdown div{
-padding:12px 20px;
-cursor:pointer;
-border-bottom:1px solid #eee;
-}
-
-.dropdown div:hover{
-background:#f5f5f5;
-}
-
-/* SIDE MENU */
-.side-menu{
-position:fixed;
-left:-260px;
-top:0;
-width:260px;
-height:100%;
-background:white;
-box-shadow:3px 0 10px rgba(0,0,0,0.15);
-transition:0.3s;
-z-index:999;
-}
-
-.side-header{
-padding:15px;
-border-bottom:1px solid #eee;
-display:flex;
-justify-content:flex-end;
-}
-
-.close-menu{
-cursor:pointer;
-padding:4px 10px;
-border:1px solid #ccc;
-border-radius:6px;
-}
-
-.menu-item{
-padding:15px;
-border-bottom:1px solid #eee;
-cursor:pointer;
-}
-
-.menu-item:hover{
-background:#f5f5f5;
-}
-
-/* POST */
-.container{
-padding:20px;
-}
-
-.post{
-background:white;
-border-radius:14px;
-padding:15px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
-transition:0.2s;
-}
-
-.post:hover{
-transform:translateY(-4px);
-box-shadow:0 10px 20px rgba(0,0,0,0.15);
-}
-
-.post-left{
-max-width:70%;
-}
-
-.tag{
-display:inline-block;
-border:1px solid #2ecc71;
-padding:4px 10px;
-border-radius:6px;
-margin-top:6px;
-color:#2ecc71;
-font-size:13px;
-}
-
-.buy-btn{
-background:red;
-color:white;
-border:none;
-padding:10px 18px;
-border-radius:8px;
-cursor:pointer;
-}
-
-/* POPUP */
-.popup{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-display:none;
-align-items:center;
 justify-content:center;
-z-index:9999;
+align-items:center;
+background:
+linear-gradient(120deg,#7a6a5a,#9b8b79);
 }
 
-.popup-box{
-background:white;
-padding:20px;
-border-radius:14px;
-min-width:300px;
-max-width:95%;
+/* bảng mạch chính */
+.board{
+width:900px;
+height:520px;
+background:#efe7d9;
+border-radius:18px;
 position:relative;
-}
-
-.close{
-position:absolute;
-right:10px;
-top:8px;
-cursor:pointer;
-border:1px solid #ccc;
-padding:2px 8px;
-border-radius:6px;
-}
-
-.close:hover{
-background:red;
-color:white;
-}
-
-/* LOGIN */
-.input{
-width:100%;
-padding:10px;
-margin-top:10px;
-border:1px solid #ddd;
-border-radius:8px;
-}
-
-.login-btn{
-background:red;
-color:white;
-border:none;
-padding:10px;
-margin-top:10px;
-width:100%;
-border-radius:8px;
-cursor:pointer;
-}
-
-.link{
-font-size:13px;
-margin-top:6px;
-cursor:pointer;
-}
-
-/* LOADING */
-.loading{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:white;
-display:none;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-z-index:99999;
-}
-
-.loading img{
-width:120px;
-margin-bottom:15px;
-}
-
-.bar{
-width:200px;
-height:10px;
-background:#eee;
-border-radius:10px;
+box-shadow:0 20px 40px rgba(0,0,0,.35);
 overflow:hidden;
 }
 
-.bar div{
-height:100%;
-width:0%;
-background:#2ecc71;
+/* khung nhựa trên */
+.top-cover{
+position:absolute;
+top:-40px;
+right:40px;
+width:420px;
+height:180px;
+background:#cfcfcf;
+border-radius:14px;
+box-shadow:0 10px 15px rgba(0,0,0,.25);
 }
 
+/* chip */
+.chip{
+position:absolute;
+bottom:70px;
+right:80px;
+width:220px;
+height:140px;
+background:#111;
+border-radius:10px;
+box-shadow:
+inset 0 0 10px rgba(255,255,255,.1),
+0 10px 20px rgba(0,0,0,.3);
+}
+
+.chip:before,
+.chip:after{
+content:"";
+position:absolute;
+left:-20px;
+right:-20px;
+height:10px;
+background:repeating-linear-gradient(
+90deg,
+#999 0 6px,
+transparent 6px 14px
+);
+}
+
+.chip:before{top:-12px;}
+.chip:after{bottom:-12px;}
+
+/* tụ điện */
+.cap{
+position:absolute;
+width:40px;
+height:60px;
+background:#444;
+border-radius:8px;
+box-shadow:0 6px 10px rgba(0,0,0,.3);
+}
+
+.cap:nth-child(1){bottom:70px;left:60px;}
+.cap:nth-child(2){bottom:70px;left:120px;}
+.cap:nth-child(3){bottom:70px;left:180px;}
+
+/* đường mạch */
+.trace{
+position:absolute;
+background:#d9cfbf;
+border-radius:6px;
+}
+
+.t1{width:200px;height:12px;top:180px;left:60px;}
+.t2{width:12px;height:160px;top:180px;left:248px;}
+.t3{width:160px;height:12px;top:320px;left:248px;}
+.t4{width:12px;height:100px;top:320px;left:408px;}
+
+/* lỗ ốc */
+.hole{
+position:absolute;
+width:16px;
+height:16px;
+background:#bfb7a7;
+border-radius:50%;
+box-shadow:inset 0 0 4px rgba(0,0,0,.5);
+}
+
+.h1{top:20px;left:20px;}
+.h2{top:20px;right:20px;}
+.h3{bottom:20px;left:20px;}
+.h4{bottom:20px;right:20px;}
+
+.title{
+position:absolute;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+font-weight:bold;
+color:#444;
+letter-spacing:2px;
+}
 </style>
 </head>
+
 <body>
 
-<div class="header">
-bán tài khoản facebook
-</div>
+<div class="board">
 
-<div class="topbar">
+<div class="title">MAIN BOARD</div>
 
-<div class="menu-btn" onclick="openMenu()">☰</div>
+<div class="top-cover"></div>
 
-<div class="right-box">
-<div class="username" id="hello">Xin chào, khách</div>
-<img class="avatar" onclick="toggleDropdown()"
-src="https://d2eioyamun8mp1.cloudfront.net/images/1775110178008_od0kbCwWky.jpg">
-</div>
+<div class="chip"></div>
 
-</div>
+<div class="cap"></div>
+<div class="cap"></div>
+<div class="cap"></div>
 
-<!-- dropdown -->
-<div class="dropdown" id="dropdown"></div>
+<div class="trace t1"></div>
+<div class="trace t2"></div>
+<div class="trace t3"></div>
+<div class="trace t4"></div>
 
-<!-- side menu -->
-<div class="side-menu" id="menu">
-<div class="side-header">
-<div class="close-menu" onclick="closeMenu()">X</div>
-</div>
-
-<div class="menu-item" onclick="location.reload()">Trang chủ</div>
-<div class="menu-item" onclick="napTien()">Nạp tiền</div>
-<div class="menu-item" onclick="hoTro()">Hỗ trợ</div>
-<div class="menu-item" onclick="lichSu()">Lịch sử giao dịch</div>
+<div class="hole h1"></div>
+<div class="hole h2"></div>
+<div class="hole h3"></div>
+<div class="hole h4"></div>
 
 </div>
-
-<!-- POST -->
-<div class="container">
-
-<div class="post">
-
-<div class="post-left">
-<div>
-TÀI KHOẢN TẠO 2 THÁNG, 1K-2KFR, 2FA, MAIL NHẬN ĐƯỢC CODE
-</div>
-
-<div class="tag">Số lượng: 10</div>
-<div class="tag">Giá: 10000đ</div>
-
-</div>
-
-<button class="buy-btn" onclick="buy()">Mua ngay</button>
-
-</div>
-
-</div>
-
-<!-- LOGIN POPUP -->
-<div class="popup" id="loginPopup">
-<div class="popup-box">
-
-<div class="close" onclick="closeLogin()">X</div>
-
-<input class="input" id="user" placeholder="name user">
-<input class="input" id="pass" type="password" placeholder="pass">
-
-<button class="login-btn" onclick="login()">Đăng nhập</button>
-
-<div class="link">Đăng kí</div>
-
-</div>
-</div>
-
-<!-- BUY POPUP -->
-<div class="popup" id="buyPopup">
-<div class="popup-box">
-
-<div class="close" onclick="closeBuy()">X</div>
-
-<div>
-TÀI KHOẢN TẠO 2 THÁNG, 1K-2KFR, 2FA, MAIL NHẬN ĐƯỢC CODE
-</div>
-
-<input class="input" id="qty" type="number" placeholder="Số lượng cần mua"
-oninput="calc()">
-
-<div id="total">Thành tiền: 0đ</div>
-
-<button class="login-btn" onclick="thanhToan()">Thanh toán</button>
-
-</div>
-</div>
-
-<!-- loading -->
-<div class="loading" id="loading">
-
-<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg">
-
-<div class="bar">
-<div id="bar"></div>
-</div>
-
-</div>
-<script>
-let logged=false
-let balance=0
-let history=[]
-
-/* STORAGE */
-function save(){
-localStorage.setItem("balance",balance)
-localStorage.setItem("history",JSON.stringify(history))
-}
-
-function load(){
-balance=parseInt(localStorage.getItem("balance")) || 0
-history=JSON.parse(localStorage.getItem("history")||"[]")
-}
-
-/* DROPDOWN */
-function toggleDropdown(){
-let box=document.getElementById("dropdown")
-
-if(box.style.display=="block"){
-box.style.display="none"
-return
-}
-
-box.innerHTML=""
-
-if(logged){
-
-box.innerHTML+=`<div>Số dư: ${balance}đ</div>`
-box.innerHTML+=`<div onclick="napTien()">Nạp tiền</div>`
-box.innerHTML+=`<div onclick="logout()">Đăng xuất</div>`
-
-}else{
-
-box.innerHTML+=`<div onclick="openLogin()">Đăng nhập</div>`
-box.innerHTML+=`<div>Đăng kí</div>`
-
-}
-
-box.style.display="block"
-}
-
-function openMenu(){
-document.getElementById("menu").style.left="0"
-}
-
-function closeMenu(){
-document.getElementById("menu").style.left="-260px"
-}
-
-function openLogin(){
-document.getElementById("loginPopup").style.display="flex"
-}
-
-function closeLogin(){
-document.getElementById("loginPopup").style.display="none"
-}
-
-function login(){
-let u=document.getElementById("user").value.trim()
-let p=document.getElementById("pass").value.trim()
-
-if(u=="admin" && p=="admin"){
-
-alert("đăng nhập thành công")
-document.cookie="user="+u+"; path=/"
-startLoading()
-
-}else{
-alert("sai tài khoản hoặc mật khẩu")
-}
-}
-
-function startLoading(){
-document.getElementById("loading").style.display="flex"
-
-let i=0
-let bar=document.getElementById("bar")
-
-let t=setInterval(()=>{
-i++
-bar.style.width=i+"%"
-
-if(i>=100){
-clearInterval(t)
-
-logged=true
-let u=getCookie("user")
-document.getElementById("hello").innerText="Xin chào, "+u
-
-load()
-document.getElementById("loading").style.display="none"
-closeLogin()
-
-}
-
-},20)
-}
-
-function logout(){
-document.cookie="user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
-location.reload()
-}
-
-function getCookie(name){
-let v=document.cookie.match('(^|;) ?'+name+'=([^;]*)(;|$)')
-return v?v[2]:null
-}
-
-window.onload=function(){
-let u=getCookie("user")
-if(u){
-logged=true
-document.getElementById("hello").innerText="Xin chào, "+u
-load()
-}
-}
-
-/* BUY */
-function buy(){
-
-if(!logged){
-openLogin()
-return
-}
-
-document.getElementById("buyPopup").style.display="flex"
-}
-
-function closeBuy(){
-document.getElementById("buyPopup").style.display="none"
-}
-
-function calc(){
-let q=document.getElementById("qty").value || 0
-if(q<0) q=0
-
-let total=q*10000
-document.getElementById("total").innerText="Thành tiền: "+total+"đ"
-}
-
-function thanhToan(){
-
-let q=document.getElementById("qty").value || 0
-q=parseInt(q)
-
-if(!q || q<=0){
-alert("Nhập số lượng")
-return
-}
-
-let total=q*10000
-
-if(balance < total){
-alert("Không đủ số dư")
-return
-}
-
-balance-=total
-
-history.unshift({
-time:new Date().toLocaleString(),
-name:"TK FB 2 THÁNG",
-qty:q,
-total:total
-})
-
-save()
-
-alert("Mua thành công")
-closeBuy()
-}
-
-/* NẠP TIỀN */
-function napTien(){
-closeMenu()
-
-let html=`
-<div class="popup" style="display:flex">
-<div class="popup-box">
-
-<div class="close"
-onclick="this.parentElement.parentElement.remove()">X</div>
-
-<div>Nạp demo:</div>
-
-<input id="nap" class="input" placeholder="Nhập số tiền">
-
-<button class="login-btn" onclick="xacNhanNap()">Xác nhận</button>
-
-</div>
-</div>
-`
-
-document.body.insertAdjacentHTML("beforeend",html)
-}
-
-function xacNhanNap(){
-let n=parseInt(document.getElementById("nap").value)
-
-if(!n || n<=0){
-alert("Nhập số hợp lệ")
-return
-}
-
-balance+=n
-save()
-
-alert("Nạp thành công")
-
-document.querySelector(".popup").remove()
-}
-
-function hoTro(){
-closeMenu()
-
-alert("Liên hệ admin")
-}
-
-function lichSu(){
-closeMenu()
-
-let list=""
-
-if(history.length==0){
-list="Chưa có lịch sử"
-}else{
-
-history.forEach(i=>{
-list+=`
-<div style="border-bottom:1px solid #eee;padding:8px">
-${i.time}<br>
-${i.name} | SL: ${i.qty} | ${i.total}đ
-</div>
-`
-})
-
-}
-
-let html=`
-<div class="popup" style="display:flex">
-<div class="popup-box" style="width:500px;height:400px">
-
-<div class="close"
-onclick="this.parentElement.parentElement.remove()">X</div>
-
-<div style="height:100%;overflow:auto">
-${list}
-</div>
-
-</div>
-</div>
-`
-
-document.body.insertAdjacentHTML("beforeend",html)
-}
-
-/* CLICK OUTSIDE CLOSE */
-window.onclick=function(e){
-let dropdown=document.getElementById("dropdown")
-if(!e.target.closest(".avatar") && !e.target.closest(".dropdown")){
-dropdown.style.display="none"
-}
-}
-
-/* HOVER X RED */
-document.addEventListener("mouseover",function(e){
-if(e.target.classList.contains("close")){
-e.target.style.background="red"
-e.target.style.color="white"
-}
-})
-
-document.addEventListener("mouseout",function(e){
-if(e.target.classList.contains("close")){
-e.target.style.background=""
-e.target.style.color=""
-}
-})
-</script>
 
 </body>
 </html>
