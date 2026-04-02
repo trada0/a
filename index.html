@@ -3,34 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bán tài khoản facebook</title>
+<title>Bán tài khoản Facebook</title>
 
 <style>
 *{
-margin:0;
-padding:0;
 box-sizing:border-box;
 font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
+margin:0;
 background:#f5f5f5;
-border-radius:12px;
+border-radius:14px;
 overflow-x:hidden;
 }
 
 /* HEADER */
-.top-title{
+.header{
 width:100%;
 background:#e9e9e9;
 text-align:center;
-padding:18px 10px;
-font-size:24px;
+padding:18px;
+font-size:22px;
 font-weight:bold;
+position:relative;
 border-bottom:1px solid #ccc;
 }
 
-.header-bar{
+/* TOP BAR */
+.topbar{
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -38,14 +39,14 @@ padding:10px 15px;
 }
 
 /* MENU ICON */
-.menu-icon{
-font-size:26px;
+.menu-btn{
+font-size:24px;
 cursor:pointer;
-padding:5px 10px;
+padding:6px 10px;
 border-radius:8px;
 }
 
-.menu-icon:hover{
+.menu-btn:hover{
 background:#ddd;
 }
 
@@ -54,7 +55,6 @@ background:#ddd;
 display:flex;
 align-items:center;
 gap:10px;
-position:relative;
 }
 
 .avatar{
@@ -65,172 +65,163 @@ cursor:pointer;
 border:2px solid #ddd;
 }
 
-.avatar:hover{
-border-color:red;
-}
-
 .username{
 font-size:14px;
+color:#333;
 }
 
 /* DROPDOWN */
 .dropdown{
 position:absolute;
-top:55px;
-right:0;
+right:10px;
+top:110px;
 background:white;
 border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.15);
-overflow:hidden;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
 display:none;
-min-width:180px;
-z-index:1000;
+flex-direction:column;
+overflow:hidden;
+z-index:999;
 }
 
 .dropdown div{
-padding:12px;
+padding:12px 18px;
 border-bottom:1px solid #eee;
 cursor:pointer;
 }
 
 .dropdown div:hover{
-background:#f3f3f3;
+background:#f5f5f5;
 }
 
 /* SIDE MENU */
 .side-menu{
 position:fixed;
-top:0;
 left:-260px;
+top:0;
 width:260px;
 height:100%;
 background:white;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
+box-shadow:0 0 10px rgba(0,0,0,0.3);
 transition:0.3s;
-z-index:2000;
-display:flex;
-flex-direction:column;
+z-index:9999;
+border-radius:0 14px 14px 0;
 }
 
-.side-menu.active{
+.side-menu.show{
 left:0;
 }
 
-.menu-close{
-text-align:right;
+.menu-header{
+display:flex;
+justify-content:flex-end;
 padding:10px;
-cursor:pointer;
-font-weight:bold;
 }
 
-.menu-close:hover{
-color:red;
+.close-menu{
+cursor:pointer;
+padding:5px 10px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+.close-menu:hover{
+background:red;
+color:white;
 }
 
 .menu-item{
 padding:15px;
-border-top:1px solid #eee;
+border-bottom:1px solid #eee;
 cursor:pointer;
 }
 
 .menu-item:hover{
-background:#f5f5f5;
+background:#f0f0f0;
 }
 
 /* POST */
+.container{
+padding:20px;
+}
+
 .post{
 background:white;
-margin:20px;
+border-radius:14px;
 padding:15px;
-border-radius:12px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 transition:0.2s;
-box-shadow:0 0 5px rgba(0,0,0,0.05);
+box-shadow:0 0 5px rgba(0,0,0,0.1);
 }
 
 .post:hover{
-transform:translateY(-5px);
-box-shadow:0 10px 20px rgba(0,0,0,0.1);
+transform:translateY(-4px);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
 .post-left{
-width:70%;
+max-width:70%;
 }
 
-.post-title{
-font-weight:bold;
-margin-bottom:10px;
-}
-
-.info-box{
+.badge{
 display:inline-block;
-border:1px solid #2ecc71;
-color:#2ecc71;
 padding:5px 10px;
 border-radius:6px;
-margin-right:10px;
-font-size:13px;
+border:1px solid #4caf50;
+color:#4caf50;
+margin-top:5px;
+margin-right:5px;
 }
 
 .buy-btn{
 background:red;
 color:white;
 border:none;
-padding:12px 18px;
+padding:10px 18px;
 border-radius:8px;
 cursor:pointer;
-}
-
-.buy-btn:hover{
-opacity:0.9;
 }
 
 /* POPUP */
 .popup{
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:3000;
-}
-
-.popup-box{
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 background:white;
 padding:20px;
-border-radius:12px;
-width:90%;
-max-width:400px;
-position:relative;
+border-radius:14px;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
+display:none;
+z-index:99999;
+min-width:300px;
+max-width:90%;
 }
 
-.close{
+.popup-close{
 position:absolute;
+top:8px;
 right:10px;
-top:10px;
 cursor:pointer;
-padding:4px 8px;
 border:1px solid #ccc;
+padding:2px 8px;
 border-radius:6px;
 }
 
-.close:hover{
-color:red;
-border-color:red;
+.popup-close:hover{
+background:red;
+color:white;
 }
 
-input{
+/* LOGIN */
+.input{
 width:100%;
 padding:10px;
-margin:8px 0;
-border-radius:8px;
 border:1px solid #ccc;
+border-radius:8px;
+margin-top:10px;
 }
 
 .login-btn{
@@ -238,57 +229,16 @@ background:red;
 color:white;
 border:none;
 padding:10px;
+border-radius:8px;
+margin-top:10px;
+cursor:pointer;
 width:100%;
-border-radius:8px;
+}
+
+.register-link{
+font-size:13px;
+margin-top:5px;
 cursor:pointer;
-}
-
-.small-link{
-font-size:12px;
-cursor:pointer;
-}
-
-/* BUY POPUP */
-.buy-row{
-margin:10px 0;
-}
-
-.pay-btn{
-background:red;
-color:white;
-padding:10px;
-width:100%;
-border:none;
-border-radius:8px;
-cursor:pointer;
-}
-
-/* SUPPORT */
-.support-box{
-display:flex;
-align-items:center;
-gap:10px;
-border:1px solid #ddd;
-padding:10px;
-border-radius:10px;
-margin-bottom:10px;
-cursor:pointer;
-}
-
-.support-box img{
-width:80px;
-border-radius:8px;
-}
-
-/* HISTORY */
-.history-box{
-height:200px;
-display:flex;
-align-items:center;
-justify-content:center;
-border:1px solid #eee;
-border-radius:8px;
-margin-top:20px;
 }
 
 /* LOADING */
@@ -300,395 +250,350 @@ width:100%;
 height:100%;
 background:white;
 display:none;
-justify-content:center;
 align-items:center;
+justify-content:center;
 flex-direction:column;
-z-index:5000;
-}
-
-.loading img{
-width:120px;
-margin-bottom:15px;
+z-index:999999;
 }
 
 .progress{
 width:200px;
-height:10px;
+height:8px;
 background:#eee;
 border-radius:10px;
+margin-top:10px;
 overflow:hidden;
 }
 
-.progress-bar{
+.bar{
 height:100%;
 width:0%;
 background:red;
 }
+
+/* SUPPORT */
+.support-box{
+display:flex;
+align-items:center;
+gap:10px;
+border:1px solid #ccc;
+padding:10px;
+border-radius:10px;
+margin-top:10px;
+cursor:pointer;
+}
+
+.support-box img{
+width:80px;
+border-radius:8px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="top-title">bán tài khoản facebook</div>
+<div class="header">
+bán tài khoản facebook
+</div>
 
-<div class="header-bar">
-<div class="menu-icon" onclick="openMenu()">☰</div>
+<div class="topbar">
+<div class="menu-btn" onclick="openMenu()">☰</div>
 
 <div class="user-area">
-<div class="username" id="helloText">Xin chào, khách</div>
-
-<img class="avatar"
-onclick="toggleDropdown()"
+<div class="username" id="helloText">Xin chào, Khách</div>
+<img class="avatar" onclick="toggleDropdown()" 
 src="https://d2eioyamun8mp1.cloudfront.net/images/1775110178008_od0kbCwWky.jpg">
+</div>
+</div>
 
 <div class="dropdown" id="dropdown"></div>
-</div>
-</div>
-
 
 <!-- SIDE MENU -->
 <div class="side-menu" id="sideMenu">
-<div class="menu-close" onclick="closeMenu()">X</div>
-
-<div class="menu-item" onclick="location.reload()">Trang chủ</div>
-
-<div class="menu-item" onclick="openNap()">Nạp tiền</div>
-
-<div class="menu-item" onclick="openSupport()">Hỗ trợ</div>
-
-<div class="menu-item" onclick="openHistory()">lịch sử giao dịch</div>
-
+<div class="menu-header">
+<div class="close-menu" onclick="closeMenu()">X</div>
 </div>
 
+<div class="menu-item" onclick="location.reload()">Trang chủ</div>
+<div class="menu-item" onclick="openNap()">Nạp tiền</div>
+<div class="menu-item" onclick="openSupport()">Hỗ trợ</div>
+<div class="menu-item" onclick="openHistory()">Lịch sử giao dịch</div>
+</div>
 
 <!-- POST -->
+<div class="container">
 <div class="post">
 <div class="post-left">
-<div class="post-title">
+<div>
 TÀI KHOẢN TẠO 2 THÁNG, 1K-2KFR, 2FA, MAIL NHẬN ĐƯỢC CODE
 </div>
 
-<div>
-<span class="info-box">Số lượng: 10</span>
-<span class="info-box">Giá: 10000đ</span>
-</div>
+<div class="badge">Số lượng: 10</div>
+<div class="badge">Giá: 10000đ</div>
+
 </div>
 
 <button class="buy-btn" onclick="openBuy()">Mua ngay</button>
 </div>
-
+</div>
 
 <!-- LOGIN POPUP -->
 <div class="popup" id="loginPopup">
-<div class="popup-box">
+<div class="popup-close" onclick="closePopup('loginPopup')">X</div>
 
-<div class="close" onclick="closeLogin()">X</div>
-
-<input id="user" placeholder="name user">
-<input id="pass" type="password" placeholder="pass">
+<input class="input" placeholder="name user" id="user">
+<input class="input" placeholder="pass" id="pass" type="password">
 
 <button class="login-btn" onclick="login()">Đăng nhập</button>
-
-<div class="small-link">đăng kí</div>
+<div class="register-link">đăng kí</div>
 
 </div>
-</div>
-
 
 <!-- BUY POPUP -->
 <div class="popup" id="buyPopup">
-<div class="popup-box">
-
-<div class="close" onclick="closeBuy()">X</div>
+<div class="popup-close" onclick="closePopup('buyPopup')">X</div>
 
 <div>
 TÀI KHOẢN TẠO 2 THÁNG, 1K-2KFR, 2FA, MAIL NHẬN ĐƯỢC CODE
 </div>
 
-<div class="buy-row">
+<div style="margin-top:10px">
 Số lượng cần mua
-<input type="number" id="qty" value="1" oninput="calc()">
+<input class="input" type="number" value="1" id="qty" oninput="calc()">
 </div>
 
-<div class="buy-row">
+<div style="margin-top:10px">
 Thành tiền: <span id="total">10000</span>đ
 </div>
 
-<button class="pay-btn">Thanh toán</button>
+<button class="login-btn">Thanh toán</button>
 
 </div>
-</div>
-
 
 <!-- SUPPORT -->
 <div class="popup" id="supportPopup">
-<div class="popup-box">
-
-<div class="close" onclick="closeSupport()">X</div>
+<div class="popup-close" onclick="closePopup('supportPopup')">X</div>
 
 <div class="support-box"
 onclick="window.open('https://zalo.me/0347241585')">
 <img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119884021_m6gzpRkcXR.jpg">
-<div>zalo</div>
+<div>Zalo</div>
 </div>
 
 <div class="support-box"
 onclick="window.open('https://www.facebook.com/profile.php?id=1815703088')">
 <img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg">
-<div>facebook</div>
+<div>Facebook</div>
 </div>
 
 </div>
-</div>
-
 
 <!-- HISTORY -->
 <div class="popup" id="historyPopup">
-<div class="popup-box">
+<div style="position:absolute;top:-18px;left:10px;font-weight:bold">
+Lịch sử giao dịch
+</div>
 
-<div class="close" onclick="closeHistory()">X</div>
+<div class="popup-close" onclick="closePopup('historyPopup')">X</div>
 
-<div style="font-weight:bold">lịch sử giao dịch</div>
-
-<div class="history-box">
+<div style="text-align:center;padding:40px">
 Chưa có lịch sử giao dịch nào
 </div>
 
 </div>
-</div>
-
 
 <!-- NAP -->
 <div class="popup" id="napPopup">
-<div class="popup-box">
-<div class="close" onclick="closeNap()">X</div>
-
-TÍNH NĂNG SẼ ĐƯỢC ADMIN UPDATE SAU
-
+<div class="popup-close" onclick="closePopup('napPopup')">X</div>
+<div>TÍNH NĂNG SẼ ĐƯỢC ADMIN UPDATE SAU</div>
 </div>
-</div>
-
 
 <!-- LOADING -->
 <div class="loading" id="loading">
-<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg">
+<img width="120"
+src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg">
 
 <div class="progress">
-<div class="progress-bar" id="bar"></div>
+<div class="bar" id="bar"></div>
 </div>
 </div>
-
 
 <script>
 
-let logged=false
+function openMenu(){
+document.getElementById("sideMenu").classList.add("show")
+}
+
+function closeMenu(){
+document.getElementById("sideMenu").classList.remove("show")
+}
 
 function toggleDropdown(){
-let d=document.getElementById("dropdown")
-d.style.display=d.style.display=="block"?"none":"block"
+let box=document.getElementById("dropdown")
+box.style.display=box.style.display=="flex"?"none":"flex"
 
-if(logged){
-d.innerHTML=`
+let user=localStorage.getItem("user")
+
+if(user){
+box.innerHTML=`
 <div>Cập nhật thông tin</div>
 <div>Nạp tiền</div>
 <div onclick="logout()">Đăng xuất</div>
 `
 }else{
-d.innerHTML=`
-<div onclick="openLogin()">đăng nhập</div>
-<div>đăng kí</div>
+box.innerHTML=`
+<div onclick="openLogin()">Đăng nhập</div>
+<div>Đăng kí</div>
 `
 }
 }
 
 function openLogin(){
-loginPopup.style.display="flex"
+document.getElementById("loginPopup").style.display="block"
 }
 
-function closeLogin(){
-loginPopup.style.display="none"
+function closePopup(id){
+document.getElementById(id).style.display="none"
 }
 
 function login(){
-
-let u=user.value
-let p=pass.value
+let u=document.getElementById("user").value
+let p=document.getElementById("pass").value
 
 if(u=="admin" && p=="admin"){
-alert("đăng nhập thành công")
-
-document.cookie="user="+u
 startLoading()
+setTimeout(()=>{
+localStorage.setItem("user",u)
+location.reload()
+},1200)
 
 }else{
-alert("sai tài khoản hoặc mật khẩu")
+alert("tài khoản hoặc mật khẩu sai")
 }
+}
+
+function logout(){
+localStorage.removeItem("user")
+location.reload()
 }
 
 function startLoading(){
-loading.style.display="flex"
-let i=0
+let load=document.getElementById("loading")
+load.style.display="flex"
+
 let bar=document.getElementById("bar")
+let i=0
 
 let t=setInterval(()=>{
 i++
 bar.style.width=i+"%"
 
-if(i>=100){
-clearInterval(t)
-location.reload()
-}
-},20)
-}
+if(i>=100) clearInterval(t)
 
-window.onload=function(){
-let c=document.cookie
-if(c.includes("user=")){
-logged=true
-let name=c.split("=")[1]
-helloText.innerText="Xin chào, "+name
-}
-}
-
-function logout(){
-document.cookie="user=;"
-location.reload()
-}
-
-function openMenu(){
-sideMenu.classList.add("active")
-}
-
-function closeMenu(){
-sideMenu.classList.remove("active")
+},10)
 }
 
 function openBuy(){
-buyPopup.style.display="flex"
-}
-
-function closeBuy(){
-buyPopup.style.display="none"
+document.getElementById("buyPopup").style.display="block"
 }
 
 function calc(){
-let q=qty.value
-total.innerText=q*10000
+let q=document.getElementById("qty").value
+document.getElementById("total").innerText=q*10000
 }
 
 function openSupport(){
-supportPopup.style.display="flex"
-}
-
-function closeSupport(){
-supportPopup.style.display="none"
+document.getElementById("supportPopup").style.display="block"
 }
 
 function openHistory(){
-historyPopup.style.display="flex"
-}
-
-function closeHistory(){
-historyPopup.style.display="none"
+document.getElementById("historyPopup").style.display="block"
 }
 
 function openNap(){
-napPopup.style.display="flex"
+document.getElementById("napPopup").style.display="block"
 }
 
-function closeNap(){
-napPopup.style.display="none"
+window.onload=function(){
+let user=localStorage.getItem("user")
+if(user){
+document.getElementById("helloText").innerText="Xin chào, "+user
+}
 }
 
 </script>
 
 </body>
 </html>
-<!-- ====== NÂNG CẤP UI + RESPONSIVE + ANIMATION ====== -->
+<!-- ====== PHẦN CODE VIẾT TIẾP ====== -->
 
 <style>
 
-/* BO GÓC TOÀN WEBSITE */
-body{
-border-radius:16px;
+/* overlay nền mờ */
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.4);
+display:none;
+z-index:9999;
 }
 
-/* SCROLLBAR */
-::-webkit-scrollbar{
-width:8px;
-}
-::-webkit-scrollbar-thumb{
-background:#ccc;
-border-radius:10px;
-}
-
-/* MENU ANIMATION */
-.side-menu{
-border-top-right-radius:16px;
-border-bottom-right-radius:16px;
-}
-
-.menu-item{
-transition:0.2s;
-}
-
-.menu-item:hover{
-background:#f0f0f0;
-padding-left:22px;
-}
-
-/* DROPDOWN ANIMATION */
-.dropdown{
-animation:dropdownFade .2s ease;
-}
-
-@keyframes dropdownFade{
-from{
-opacity:0;
-transform:translateY(-10px);
-}
-to{
-opacity:1;
-transform:translateY(0px);
-}
-}
-
-/* POPUP ANIMATION */
+/* popup animation */
 .popup{
-animation:fadeIn .2s;
+animation:popupShow .2s ease;
 }
 
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
-}
-
-.popup-box{
-animation:zoom .2s;
-}
-
-@keyframes zoom{
+@keyframes popupShow{
 from{
-transform:scale(.9);
 opacity:0;
+transform:translate(-50%,-60%);
 }
 to{
-transform:scale(1);
 opacity:1;
+transform:translate(-50%,-50%);
 }
 }
 
-/* CLOSE BUTTON HOVER */
-.close{
-transition:0.2s;
+/* bo góc toàn bộ web */
+.header,
+.post,
+.popup,
+.side-menu,
+.dropdown{
+border-radius:14px;
 }
 
-.close:hover{
-background:#ffe5e5;
+/* hover dấu X */
+.popup-close{
+transition:.2s;
 }
 
-/* POST RESPONSIVE */
-@media(max-width:768px){
+.popup-close:hover{
+background:red;
+color:white;
+border:1px solid red;
+}
+
+/* dropdown đẹp hơn */
+.dropdown div:last-child{
+border-bottom:none;
+}
+
+.dropdown div{
+transition:.15s;
+}
+
+/* menu divider màu */
+.menu-item{
+border-bottom:1px solid #e0e0e0;
+}
+
+/* responsive */
+@media(max-width:600px){
 
 .post{
 flex-direction:column;
@@ -696,542 +601,177 @@ align-items:flex-start;
 gap:10px;
 }
 
-.post-left{
-width:100%;
-}
-
 .buy-btn{
 width:100%;
 }
 
-}
-
-/* HEADER RESPONSIVE */
-@media(max-width:500px){
-
-.top-title{
-font-size:18px;
-}
-
-.username{
-display:none;
-}
-
-}
-
-/* SUPPORT BOX */
-.support-box{
-transition:0.2s;
-}
-
-.support-box:hover{
-transform:translateY(-3px);
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
-
-/* BUY POPUP */
-#buyPopup .popup-box{
-max-width:450px;
-}
-
-/* HISTORY */
-#historyPopup .popup-box{
-max-width:500px;
-}
-
-/* LOGIN */
-#loginPopup .popup-box{
-max-width:350px;
-}
-
-/* LOADING TEXT */
-.loading::after{
-content:"Đang đăng nhập...";
-margin-top:10px;
-font-size:14px;
-}
-
-/* BUTTON EFFECT */
-.buy-btn,
-.login-btn,
-.pay-btn{
-transition:0.2s;
-}
-
-.buy-btn:hover,
-.login-btn:hover,
-.pay-btn:hover{
-transform:translateY(-1px);
-box-shadow:0 5px 10px rgba(0,0,0,0.15);
-}
-
-/* INPUT FOCUS */
-input:focus{
-outline:none;
-border-color:red;
-box-shadow:0 0 5px rgba(255,0,0,0.2);
-}
-
-/* MENU OVERLAY */
-.menu-overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.3);
-display:none;
-z-index:1500;
-}
-
-.menu-overlay.active{
-display:block;
-}
-
-</style>
-
-
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
-
-<script>
-
-/* MENU OVERLAY FIX */
-function openMenu(){
-sideMenu.classList.add("active")
-menuOverlay.classList.add("active")
-}
-
-function closeMenu(){
-sideMenu.classList.remove("active")
-menuOverlay.classList.remove("active")
-}
-
-/* CLICK OUTSIDE CLOSE DROPDOWN */
-document.addEventListener("click",function(e){
-
-if(!e.target.closest(".user-area")){
-dropdown.style.display="none"
-}
-
-})
-
-/* ESC CLOSE ALL */
-document.addEventListener("keydown",function(e){
-
-if(e.key==="Escape"){
-closeLogin()
-closeBuy()
-closeSupport()
-closeHistory()
-closeNap()
-closeMenu()
-}
-
-})
-
-/* AUTO CLOSE POPUP WHEN CLICK OUTSIDE */
-document.querySelectorAll(".popup").forEach(p=>{
-
-p.addEventListener("click",function(e){
-if(e.target===p){
-p.style.display="none"
-}
-})
-
-})
-
-/* LOGIN ENTER KEY */
-document.addEventListener("keypress",function(e){
-if(e.key==="Enter"){
-if(loginPopup.style.display=="flex"){
-login()
-}
-}
-})
-
-/* FAKE PAYMENT */
-document.querySelector(".pay-btn").onclick=function(){
-
-if(!logged){
-alert("Vui lòng đăng nhập trước")
-return
-}
-
-alert("Thanh toán thành công (demo)")
-closeBuy()
-
-}
-
-/* ADD MULTI POST DEMO */
-function createPost(){
-
-let p=document.createElement("div")
-p.className="post"
-
-p.innerHTML=`
-<div class="post-left">
-
-<div class="post-title">
-TÀI KHOẢN VIA CỔ 3 NĂM, 5K FRIEND
-</div>
-
-<div>
-<span class="info-box">Số lượng: 5</span>
-<span class="info-box">Giá: 20000đ</span>
-</div>
-
-</div>
-
-<button class="buy-btn" onclick="openBuy()">Mua ngay</button>
-`
-
-document.body.appendChild(p)
-
-}
-
-createPost()
-createPost()
-
-/* SMOOTH LOADING */
-function startLoading(){
-loading.style.display="flex"
-let i=0
-let bar=document.getElementById("bar")
-
-let t=setInterval(()=>{
-
-i+=2
-bar.style.width=i+"%"
-
-if(i>=100){
-clearInterval(t)
-setTimeout(()=>{
-location.reload()
-},200)
-}
-
-},15)
-}
-
-/* COOKIE GET */
-function getCookie(name){
-let v=document.cookie.match('(^|;) ?'+name+'=([^;]*)(;|$)')
-return v?v[2]:null
-}
-
-window.onload=function(){
-
-let user=getCookie("user")
-
-if(user){
-logged=true
-helloText.innerText="Xin chào, "+user
-}
-
-}
-
-</script>
-<!-- ===== NÂNG CẤP FULL CHỨC NĂNG THEO YÊU CẦU ===== -->
-
-<style>
-
-/* BO GÓC TOÀN SITE */
-html,body{
-border-radius:18px;
-}
-
-/* CARD EFFECT */
-.post{
-position:relative;
-overflow:hidden;
-}
-
-.post::after{
-content:"";
-position:absolute;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
-opacity:0;
-transition:.4s;
-}
-
-.post:hover::after{
-opacity:1;
-}
-
-/* HEADER SHADOW */
-.top-title{
-box-shadow:0 3px 10px rgba(0,0,0,0.05);
-}
-
-/* AVATAR MENU STYLE */
-.dropdown div{
-transition:.2s;
-}
-
-.dropdown div:hover{
-padding-left:18px;
-}
-
-/* POPUP LARGE RESPONSIVE */
-.popup-box{
-max-height:90vh;
-overflow:auto;
-}
-
-/* HISTORY TITLE OUTSIDE */
-.history-title{
-position:absolute;
-top:-20px;
-left:10px;
-background:white;
-padding:3px 10px;
-font-weight:bold;
-border-radius:6px;
-border:1px solid #eee;
-}
-
-/* LOADING TEXT */
-.loading-text{
-margin-top:10px;
-font-size:13px;
-color:#666;
-}
-
-/* QUANTITY INPUT */
-#qty{
-text-align:center;
-font-weight:bold;
-}
-
-/* MENU BORDER */
-.menu-item{
-border-bottom:1px solid #eee;
-}
-
-/* MOBILE FIX */
-@media(max-width:600px){
-
-.popup-box{
-width:95%;
-padding:15px;
-}
-
-.info-box{
-display:block;
-margin-bottom:5px;
+.post-left{
+max-width:100%;
 }
 
 }
 
 </style>
 
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
 
 <script>
 
-/* ===== LOGIN REQUIRED WHEN BUY ===== */
+/* overlay helpers */
+function showOverlay(){
+document.getElementById("overlay").style.display="block"
+}
+
+function hideOverlay(){
+document.getElementById("overlay").style.display="none"
+}
+
+/* sửa open popup */
+function openLogin(){
+showOverlay()
+document.getElementById("loginPopup").style.display="block"
+}
+
 function openBuy(){
-
-if(!logged){
-alert("Vui lòng đăng nhập trước khi mua")
-openLogin()
-return
+showOverlay()
+document.getElementById("buyPopup").style.display="block"
 }
 
-buyPopup.style.display="flex"
-calc()
-
+function openSupport(){
+showOverlay()
+document.getElementById("supportPopup").style.display="block"
 }
 
-/* ===== FORMAT MONEY ===== */
-function format(n){
-return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,".")
+function openHistory(){
+showOverlay()
+document.getElementById("historyPopup").style.display="block"
 }
 
-/* ===== CALC TOTAL ===== */
-function calc(){
-
-let q=parseInt(qty.value || 1)
-let price=10000
-
-total.innerText=format(q*price)
-
+function openNap(){
+showOverlay()
+document.getElementById("napPopup").style.display="block"
 }
 
-/* ===== FAKE HISTORY ===== */
-function addHistory(item){
-
-let box=document.querySelector(".history-box")
-
-box.innerHTML += `
-<div style="
-border-bottom:1px solid #eee;
-padding:8px;
-font-size:13px;
-text-align:left
-">
-${item}
-</div>
-`
-
-}
-
-/* ===== PAYMENT ===== */
-document.querySelector(".pay-btn").onclick=function(){
-
-let q=qty.value
-let totalMoney=total.innerText
-
-alert("Thanh toán thành công")
-
-addHistory("Mua "+q+" tài khoản - "+totalMoney+"đ")
-
-closeBuy()
-
-}
-
-/* ===== DROPDOWN UPDATE ===== */
-function toggleDropdown(){
-
-let d=document.getElementById("dropdown")
-d.style.display=d.style.display=="block"?"none":"block"
-
-if(logged){
-
-d.innerHTML=`
-<div>Cập nhật thông tin</div>
-<div onclick="openNap()">Nạp tiền</div>
-<div onclick="openHistory()">Lịch sử giao dịch</div>
-<div onclick="logout()">Đăng xuất</div>
-`
-
-}else{
-
-d.innerHTML=`
-<div onclick="openLogin()">đăng nhập</div>
-<div>đăng kí</div>
-`
-
-}
-
-}
-
-/* ===== AUTO CLOSE MENU WHEN CLICK ===== */
-document.querySelectorAll(".menu-item").forEach(i=>{
-i.onclick=()=>{
-closeMenu()
-}
-})
-
-/* ===== KEY ESC CLOSE ===== */
-document.addEventListener("keydown",function(e){
-
-if(e.key=="Escape"){
+/* đóng tất cả */
+function closeAll(){
 document.querySelectorAll(".popup").forEach(p=>{
 p.style.display="none"
 })
-closeMenu()
+hideOverlay()
 }
 
+/* sửa close popup */
+function closePopup(id){
+document.getElementById(id).style.display="none"
+hideOverlay()
+}
+
+/* dropdown đóng khi click ngoài */
+document.addEventListener("click",function(e){
+let drop=document.getElementById("dropdown")
+let avatar=document.querySelector(".avatar")
+
+if(!drop.contains(e.target) && !avatar.contains(e.target)){
+drop.style.display="none"
+}
 })
 
-/* ===== SMOOTH POPUP CLOSE BTN ===== */
-document.querySelectorAll(".close").forEach(btn=>{
-btn.onmouseenter=()=>{
-btn.style.background="#ffe5e5"
-btn.style.borderColor="red"
-}
-btn.onmouseleave=()=>{
-btn.style.background="white"
-btn.style.borderColor="#ccc"
+/* menu click ngoài đóng */
+document.addEventListener("click",function(e){
+let menu=document.getElementById("sideMenu")
+let btn=document.querySelector(".menu-btn")
+
+if(!menu.contains(e.target) && !btn.contains(e.target)){
+menu.classList.remove("show")
 }
 })
 
-/* ===== AUTO LOGIN COOKIE ===== */
-window.onload=function(){
-
-let user=getCookie("user")
-
-if(user){
-logged=true
-helloText.innerText="Xin chào, "+user
-}else{
-helloText.innerText="Xin chào, khách"
+/* cookie login */
+function setCookie(name,value,days){
+let d=new Date()
+d.setTime(d.getTime()+(days*24*60*60*1000))
+let expires="expires="+d.toUTCString()
+document.cookie=name+"="+value+";"+expires+";path=/"
 }
 
+function getCookie(name){
+let n=name+"="
+let ca=document.cookie.split(';')
+for(let i=0;i<ca.length;i++){
+let c=ca[i].trim()
+if(c.indexOf(n)==0) return c.substring(n.length,c.length)
+}
+return ""
 }
 
-/* ===== UPDATE USER TEXT ===== */
+/* sửa login */
 function login(){
-
-let u=user.value
-let p=pass.value
+let u=document.getElementById("user").value
+let p=document.getElementById("pass").value
 
 if(u=="admin" && p=="admin"){
 
-document.cookie="user="+u+"; path=/"
-
 startLoading()
 
+setTimeout(()=>{
+setCookie("user",u,7)
+location.reload()
+},1200)
+
 }else{
-alert("sai tài khoản hoặc mật khẩu")
+alert("tài khoản hoặc mật khẩu")
+}
+}
+
+/* sửa logout */
+function logout(){
+setCookie("user","",-1)
+location.reload()
+}
+
+/* load username */
+window.onload=function(){
+
+let user=getCookie("user")
+
+if(user){
+document.getElementById("helloText").innerText="Xin chào, "+user
 }
 
 }
 
-/* ===== LOADING IMPROVED ===== */
+/* loading đẹp hơn */
 function startLoading(){
 
-loading.style.display="flex"
+let load=document.getElementById("loading")
+load.style.display="flex"
 
 let bar=document.getElementById("bar")
-let i=0
+let percent=0
 
 let t=setInterval(()=>{
 
-i++
-bar.style.width=i+"%"
+percent+=2
 
-if(i>=100){
+bar.style.width=percent+"%"
 
+if(percent>=100){
 clearInterval(t)
+}
 
-setTimeout(()=>{
-location.reload()
-},300)
+},20)
 
 }
 
-},15)
+/* hover post nâng mạnh hơn */
+document.querySelectorAll(".post").forEach(p=>{
+p.addEventListener("mouseenter",()=>{
+p.style.transform="translateY(-6px)"
+})
 
-}
-
-/* ===== LOGOUT ===== */
-function logout(){
-
-document.cookie="user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
-
-location.reload()
-
-}
-
-/* ===== PREVENT RIGHT CLICK (ANTI COPY) ===== */
-document.addEventListener("contextmenu",e=>e.preventDefault())
-
-/* ===== PREVENT F12 ===== */
-document.onkeydown=function(e){
-if(e.keyCode==123){
-return false
-}
-if(e.ctrlKey && e.shiftKey && e.keyCode==73){
-return false
-}
-if(e.ctrlKey && e.keyCode==85){
-return false
-}
-}
+p.addEventListener("mouseleave",()=>{
+p.style.transform="translateY(0px)"
+})
+})
 
 </script>
