@@ -3,59 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đếm Click</title>
+<title>Đếm Click + IP</title>
 
 <style>
 body{
-font-family: Arial, sans-serif;
-background:#f4f6fb;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-margin:0;
+font-family:Arial;
+background:#f5f5f5;
+padding:20px;
 }
 
 .box{
 background:white;
-padding:40px;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,0.1);
-text-align:center;
-width:300px;
-}
-
-h1{
-margin-bottom:20px;
+padding:20px;
+border-radius:10px;
+max-width:700px;
+margin:auto;
+box-shadow:0 0 15px rgba(0,0,0,0.1);
 }
 
 #count{
 font-size:40px;
 color:#007bff;
-margin:20px 0;
+margin:10px 0;
 }
 
 button{
-padding:12px 25px;
-font-size:18px;
-border:none;
-border-radius:10px;
+padding:10px 20px;
+font-size:16px;
 background:#007bff;
 color:white;
+border:none;
+border-radius:8px;
 cursor:pointer;
 }
 
-button:hover{
-background:#0056b3;
+.list{
+margin-top:20px;
+max-height:300px;
+overflow:auto;
+background:#f9f9f9;
+padding:10px;
+border-radius:8px;
 }
 
-.reset{
-margin-top:10px;
-background:#ff3b3b;
-}
-
-.reset:hover{
-background:#cc0000;
+.item{
+padding:5px;
+border-bottom:1px solid #eee;
+font-size:14px;
 }
 </style>
 </head>
@@ -63,37 +57,39 @@ background:#cc0000;
 <body>
 
 <div class="box">
-<h1>Tổng Click</h1>
-
+<h2>Tổng click toàn server</h2>
 <div id="count">0</div>
 
-<button onclick="addClick()">Click</button>
-<br>
-<button class="reset" onclick="resetClick()">Reset</button>
+<button onclick="clickAdd()">Click</button>
+
+<h3>Danh sách IP click</h3>
+<div class="list" id="list"></div>
+
 </div>
 
 <script>
-let count = localStorage.getItem("total_click");
 
-if(count === null){
-count = 0;
-}else{
-count = parseInt(count);
+async function load(){
+let res = await fetch("/get");
+let data = await res.json();
+
+document.getElementById("count").innerText = data.count;
+
+let html = "";
+data.clicks.slice().reverse().forEach(c=>{
+html += `<div class="item">${c.ip} - ${c.time}</div>`;
+});
+
+document.getElementById("list").innerHTML = html;
 }
 
-document.getElementById("count").innerText = count;
-
-function addClick(){
-count++;
-localStorage.setItem("total_click", count);
-document.getElementById("count").innerText = count;
+async function clickAdd(){
+await fetch("/click",{method:"POST"});
+load();
 }
 
-function resetClick(){
-count = 0;
-localStorage.setItem("total_click", count);
-document.getElementById("count").innerText = count;
-}
+load();
+
 </script>
 
 </body>
