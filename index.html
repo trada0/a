@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bán tài khoản facebook</title>
+<title>Bán tài khoản Facebook</title>
 
 <style>
 *{
@@ -18,19 +18,17 @@ border-radius:12px;
 overflow-x:hidden;
 }
 
-/* header */
 .header{
-background:#eee;
-text-align:center;
-padding:18px;
-font-size:24px;
-font-weight:bold;
 width:100%;
-border-bottom:1px solid #ddd;
+background:#e9e9e9;
+text-align:center;
+padding:15px;
+font-size:22px;
+font-weight:bold;
+border-radius:0 0 12px 12px;
 }
 
-/* top bar */
-.topbar{
+.top-bar{
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -38,11 +36,11 @@ padding:10px 15px;
 }
 
 .menu-btn{
-font-size:26px;
+font-size:22px;
 cursor:pointer;
 }
 
-.avatar-area{
+.user-area{
 display:flex;
 align-items:center;
 gap:10px;
@@ -56,75 +54,46 @@ border-radius:50%;
 cursor:pointer;
 }
 
-.username{
-font-size:14px;
-}
-
-/* dropdown */
 .dropdown{
 position:absolute;
+top:45px;
 right:0;
-top:50px;
 background:white;
-border:1px solid #ddd;
 border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
 display:none;
 flex-direction:column;
-min-width:160px;
-z-index:50;
+overflow:hidden;
 }
 
 .dropdown div{
-padding:10px;
-border-bottom:1px solid #eee;
+padding:10px 20px;
 cursor:pointer;
+border-bottom:1px solid #eee;
 }
 
 .dropdown div:hover{
-background:#f2f2f2;
+background:#f0f0f0;
 }
 
-/* sidebar */
-.sidebar{
-position:fixed;
-left:0;
-top:0;
-width:250px;
-height:100%;
-background:white;
-border-right:1px solid #ddd;
-padding-top:80px;
-display:none;
-z-index:60;
+.container{
+padding:20px;
 }
 
-.sidebar div{
-padding:15px;
-border:1px solid #ddd;
-margin:8px;
-border-radius:8px;
-cursor:pointer;
-}
-
-.sidebar div:hover{
-background:#eee;
-}
-
-/* post */
 .post{
 background:white;
-margin:20px;
-padding:15px;
 border-radius:12px;
+padding:15px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 transition:0.2s;
+box-shadow:0 0 5px rgba(0,0,0,0.1);
 }
 
 .post:hover{
 transform:translateY(-5px);
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
 }
 
 .post-left{
@@ -132,82 +101,102 @@ max-width:70%;
 }
 
 .tag{
-border:1px solid #0aa;
-color:#0aa;
-padding:5px 8px;
+border:1px solid #2ecc71;
+color:#2ecc71;
+padding:5px 10px;
 border-radius:6px;
 display:inline-block;
-margin-top:6px;
+margin-top:5px;
 }
 
 .buy-btn{
 background:red;
 color:white;
 border:none;
-padding:10px 15px;
+padding:10px 20px;
 border-radius:8px;
 cursor:pointer;
 }
 
-/* popup */
 .popup{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:white;
-padding:20px;
-border-radius:12px;
-border:1px solid #ddd;
-display:none;
-z-index:100;
-min-width:300px;
-}
-
-.close{
-position:absolute;
-top:8px;
-right:10px;
-cursor:pointer;
-font-weight:bold;
-}
-
-.close:hover{
-color:red;
-}
-
-/* overlay */
-.overlay{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.4);
+background:rgba(0,0,0,0.5);
 display:none;
-z-index:90;
+justify-content:center;
+align-items:center;
+z-index:999;
 }
 
-/* login */
-.input{
+.popup-box{
+background:white;
+padding:20px;
+border-radius:12px;
+min-width:300px;
+max-width:90%;
+position:relative;
+}
+
+.close{
+position:absolute;
+top:-10px;
+right:-10px;
+background:white;
+border:1px solid #ccc;
+border-radius:50%;
+width:30px;
+height:30px;
+cursor:pointer;
+}
+
+.close:hover{
+background:red;
+color:white;
+}
+
+input{
 width:100%;
-padding:8px;
-border:1px solid #ddd;
+padding:10px;
+margin:5px 0;
+border:1px solid #ccc;
 border-radius:6px;
-margin-bottom:8px;
 }
 
-.red{
+.login-btn{
 background:red;
 color:white;
 border:none;
 padding:10px;
-border-radius:8px;
-cursor:pointer;
 width:100%;
+border-radius:6px;
+cursor:pointer;
 }
 
-/* loading */
+.menu{
+position:fixed;
+top:0;
+left:-250px;
+width:250px;
+height:100%;
+background:white;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+transition:0.3s;
+padding:20px;
+z-index:1000;
+}
+
+.menu div{
+padding:10px;
+cursor:pointer;
+}
+
+.menu div:hover{
+background:#eee;
+}
+
 .loading{
 position:fixed;
 top:0;
@@ -216,55 +205,60 @@ width:100%;
 height:100%;
 background:white;
 display:none;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-flex-direction:column;
-z-index:200;
+z-index:2000;
 }
 
-.bar{
-width:250px;
-height:8px;
-background:#ddd;
+.progress{
+width:200px;
+height:10px;
+background:#eee;
 margin-top:10px;
-border-radius:6px;
+border-radius:10px;
 overflow:hidden;
 }
 
-.bar-inner{
+.progress div{
 height:100%;
 width:0%;
-background:#00aaff;
+background:#3498db;
 }
 
 </style>
 </head>
+
 <body>
 
-<div class="header">bán tài khoản facebook</div>
+<div class="loading" id="loading">
+<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg" width="120">
+<div class="progress"><div id="bar"></div></div>
+</div>
 
-<div class="topbar">
+<div class="header">
+bán tài khoản facebook
+</div>
+
+<div class="top-bar">
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<div class="avatar-area">
-<div class="username" id="hello">xin chào, khách</div>
-<img class="avatar"
-onclick="toggleAvatar()"
-src="https://d2eioyamun8mp1.cloudfront.net/images/1775110178008_od0kbCwWky.jpg">
-
-<div class="dropdown" id="avatarMenu"></div>
+<div class="user-area">
+<span id="hello"></span>
+<img class="avatar" onclick="toggleUser()" src="https://d2eioyamun8mp1.cloudfront.net/images/1775110178008_od0kbCwWky.jpg">
+<div class="dropdown" id="dropdown"></div>
 </div>
 </div>
 
-<!-- sidebar -->
-<div class="sidebar" id="sidebar">
+<div class="menu" id="menu">
 <div onclick="location.reload()">Trang chủ</div>
 <div onclick="napTien()">Nạp tiền</div>
 <div onclick="hoTro()">Hỗ trợ</div>
-<div onclick="lichSu()">lịch sử giao dịch</div>
+<div onclick="lichSu()">Lịch sử giao dịch</div>
 </div>
 
-<!-- post -->
+<div class="container">
+
 <div class="post">
 <div class="post-left">
 <div>TÀI KHOẢN TẠO 2 THÁNG, 1K-2KFR, 2FA, MAIL NHẬN ĐƯỢC CODE</div>
@@ -272,157 +266,150 @@ src="https://d2eioyamun8mp1.cloudfront.net/images/1775110178008_od0kbCwWky.jpg">
 <div class="tag">Giá: 10000đ</div>
 </div>
 
-<button class="buy-btn" onclick="mua()">mua ngay</button>
+<button class="buy-btn" onclick="buy()">Mua ngay</button>
 </div>
 
-<!-- overlay -->
-<div class="overlay" id="overlay"></div>
+</div>
 
-<!-- login popup -->
 <div class="popup" id="loginPopup">
-<div class="close" onclick="closeAll()">✖</div>
-<input class="input" id="user" placeholder="name user">
-<input class="input" id="pass" placeholder="pass" type="password">
-<button class="red" onclick="login()">đăng nhập</button>
-<div style="font-size:12px;margin-top:6px">đăng kí</div>
+<div class="popup-box">
+<button class="close" onclick="closePopup()">X</button>
+<input id="user" placeholder="name user">
+<input id="pass" type="password" placeholder="pass">
+<button class="login-btn" onclick="login()">đăng nhập</button>
+<div onclick="alert('chưa có')" style="cursor:pointer;margin-top:5px">đăng kí</div>
+</div>
 </div>
 
-<!-- mua popup -->
-<div class="popup" id="buyPopup">
-<div class="close" onclick="closeAll()">✖</div>
-<div>TÀI KHOẢN TẠO 2 THÁNG, 1K-2KFR, 2FA, MAIL NHẬN ĐƯỢC CODE</div>
-<br>
-Số lượng cần mua  
-<input class="input" type="number" value="1" id="qty" oninput="tinh()">
-
-<div id="total">Thành tiền: 10000đ</div>
-<br>
-<button class="red">thanh toán</button>
-</div>
-
-<!-- simple popup -->
-<div class="popup" id="simplePopup">
-<div class="close" onclick="closeAll()">✖</div>
-<div id="simpleText"></div>
-</div>
-
-<!-- loading -->
-<div class="loading" id="loading">
-<img width="120"
-src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg">
-<div class="bar">
-<div class="bar-inner" id="bar"></div>
-</div>
-</div>
+<div class="popup" id="popup"></div>
 
 <script>
 
-let logged=false
-let username=""
+let logged = localStorage.getItem("user")
 
-function toggleMenu(){
-document.getElementById("sidebar").style.display="block"
-document.getElementById("avatarMenu").style.display="none"
-}
-
-function toggleAvatar(){
-let menu=document.getElementById("avatarMenu")
-menu.innerHTML=""
+function renderUser(){
+let d=document.getElementById("dropdown")
+let hello=document.getElementById("hello")
 
 if(logged){
-menu.innerHTML=`
+hello.innerText="xin chào, "+logged
+d.innerHTML=`
 <div>Cập nhật thông tin</div>
 <div>Nạp tiền</div>
 <div onclick="logout()">Đăng xuất</div>
 `
 }else{
-menu.innerHTML=`
+hello.innerText=""
+d.innerHTML=`
 <div onclick="showLogin()">đăng nhập</div>
 <div>đăng kí</div>
 `
 }
+}
 
-menu.style.display="flex"
+renderUser()
+
+function toggleUser(){
+let d=document.getElementById("dropdown")
+d.style.display=d.style.display=="flex"?"none":"flex"
+d.style.flexDirection="column"
 }
 
 function showLogin(){
-document.getElementById("overlay").style.display="block"
-document.getElementById("loginPopup").style.display="block"
+document.getElementById("loginPopup").style.display="flex"
 }
 
-function closeAll(){
-document.getElementById("overlay").style.display="none"
+function closePopup(){
 document.querySelectorAll(".popup").forEach(p=>p.style.display="none")
 }
 
 function login(){
-let u=document.getElementById("user").value
-let p=document.getElementById("pass").value
+let u=user.value
+let p=pass.value
 
 if(u=="admin" && p=="admin"){
-document.getElementById("loading").style.display="flex"
+alert("đăng nhập thành công")
+localStorage.setItem("user",u)
+showLoading()
+}else{
+alert("sai tài khoản hoặc mật khẩu")
+}
+}
 
+function showLoading(){
+let l=document.getElementById("loading")
+l.style.display="flex"
+
+let bar=document.getElementById("bar")
 let i=0
-let int=setInterval(()=>{
+
+let t=setInterval(()=>{
 i++
-document.getElementById("bar").style.width=i+"%"
+bar.style.width=i+"%"
 if(i>=100){
-clearInterval(int)
-document.cookie="user="+u
+clearInterval(t)
 location.reload()
 }
-},20)
-
-}else{
-alert("tài khoản hoặc mật khẩu sai")
-}
+},10)
 }
 
 function logout(){
-document.cookie="user=;"
+localStorage.removeItem("user")
 location.reload()
 }
 
-function check(){
-let c=document.cookie
-if(c.includes("user=")){
-logged=true
-username=c.split("=")[1]
-document.getElementById("hello").innerText="xin chào, "+username
+function toggleMenu(){
+let m=document.getElementById("menu")
+m.style.left=m.style.left=="0px"?"-250px":"0px"
 }
-}
-check()
 
 function napTien(){
-document.getElementById("overlay").style.display="block"
-document.getElementById("simplePopup").style.display="block"
-document.getElementById("simpleText").innerText="TÍNH NĂNG SẼ ĐƯỢC ADMIN UPDATE SAU"
-}
-
-function hoTro(){
-document.getElementById("overlay").style.display="block"
-document.getElementById("simplePopup").style.display="block"
-document.getElementById("simpleText").innerHTML=`
-<div onclick="window.open('https://zalo.me/0347241585')">zalo</div>
-<div onclick="window.open('https://www.facebook.com/profile.php?id=1815703088')">facebook</div>
-`
+showBox("TÍNH NĂNG SẼ ĐƯỢC ADMIN UPDATE SAU")
 }
 
 function lichSu(){
-document.getElementById("overlay").style.display="block"
-document.getElementById("simplePopup").style.display="block"
-document.getElementById("simpleText").innerText="Chưa có lịch sử giao dịch nào"
+showBox("<h3>lịch sử giao dịch</h3><center>Chưa có lịch sử giao dịch nào</center>")
 }
 
-function mua(){
-document.getElementById("overlay").style.display="block"
-document.getElementById("buyPopup").style.display="block"
+function hoTro(){
+showBox(`
+<div style="display:flex;gap:10px">
+<div onclick="window.open('https://zalo.me/0347241585')" style="border:1px solid #ccc;padding:10px;border-radius:8px;cursor:pointer">
+<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg" width=50><br>zalo
+</div>
+
+<div onclick="window.open('https://www.facebook.com/profile.php?id=1815703088')" style="border:1px solid #ccc;padding:10px;border-radius:8px;cursor:pointer">
+<img src="https://d2eioyamun8mp1.cloudfront.net/images/1775119223712_rUa3GTUcQ0.jpg" width=50><br>facebook
+</div>
+</div>
+`)
 }
 
-function tinh(){
+function showBox(html){
+document.getElementById("popup").innerHTML=`
+<div class="popup-box">
+<button class="close" onclick="closePopup()">X</button>
+${html}
+</div>
+`
+document.getElementById("popup").style.display="flex"
+}
+
+function buy(){
+showBox(`
+<h3>TÀI KHOẢN TẠO 2 THÁNG, 1K-2KFR, 2FA, MAIL NHẬN ĐƯỢC CODE</h3>
+Số lượng cần mua
+<input id="qty" type="number" value="1" oninput="calc()">
+Thành tiền
+<input id="total" readonly>
+<button class="login-btn">Thanh toán</button>
+`)
+calc()
+}
+
+function calc(){
 let q=document.getElementById("qty").value
-document.getElementById("total").innerText=
-"Thành tiền: "+(q*10000)+"đ"
+document.getElementById("total").value=(q*10000)+"đ"
 }
 
 </script>
