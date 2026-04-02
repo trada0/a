@@ -3,7 +3,6 @@ const fs = require("fs");
 const app = express();
 
 app.use(express.static(__dirname));
-app.use(express.json());
 
 const FILE = "count.json";
 
@@ -11,7 +10,7 @@ function getData(){
 if(!fs.existsSync(FILE)){
 fs.writeFileSync(FILE, JSON.stringify({
 count:0,
-clicks:[]
+visits:[]
 }, null, 2));
 }
 return JSON.parse(fs.readFileSync(FILE));
@@ -21,20 +20,18 @@ function saveData(data){
 fs.writeFileSync(FILE, JSON.stringify(data, null, 2));
 }
 
-// lấy dữ liệu
-app.get("/get",(req,res)=>{
-res.json(getData());
-});
+// mỗi lần vào web
+app.get("/visit",(req,res)=>{
 
-// click
-app.post("/click",(req,res)=>{
 let data = getData();
 
-let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+let ip =
+req.headers['x-forwarded-for'] ||
+req.socket.remoteAddress;
 
 data.count++;
 
-data.clicks.push({
+data.visits.push({
 ip: ip,
 time: new Date().toLocaleString()
 });
