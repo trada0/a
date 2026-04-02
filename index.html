@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đếm Click + IP</title>
+<title>Đếm lượt vào web</title>
 
 <style>
 body{
@@ -27,16 +27,6 @@ color:#007bff;
 margin:10px 0;
 }
 
-button{
-padding:10px 20px;
-font-size:16px;
-background:#007bff;
-color:white;
-border:none;
-border-radius:8px;
-cursor:pointer;
-}
-
 .list{
 margin-top:20px;
 max-height:300px;
@@ -57,38 +47,32 @@ font-size:14px;
 <body>
 
 <div class="box">
-<h2>Tổng click toàn server</h2>
+<h2>Tổng lượt vào web</h2>
 <div id="count">0</div>
 
-<button onclick="clickAdd()">Click</button>
-
-<h3>Danh sách IP click</h3>
+<h3>Lịch sử IP</h3>
 <div class="list" id="list"></div>
 
 </div>
 
 <script>
 
-async function load(){
-let res = await fetch("/get");
+async function visit(){
+let res = await fetch("/visit");
 let data = await res.json();
 
 document.getElementById("count").innerText = data.count;
 
 let html = "";
-data.clicks.slice().reverse().forEach(c=>{
-html += `<div class="item">${c.ip} - ${c.time}</div>`;
+data.visits.slice().reverse().forEach(v=>{
+html += `<div class="item">${v.ip} - ${v.time}</div>`;
 });
 
 document.getElementById("list").innerHTML = html;
 }
 
-async function clickAdd(){
-await fetch("/click",{method:"POST"});
-load();
-}
-
-load();
+// tự chạy khi mở web
+visit();
 
 </script>
 
